@@ -14,5 +14,4 @@ public class AccountDto {
 
     private String phone;
 
-    private String location;
 }
