@@ -18,10 +18,13 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Username should be not null")
     private String username;
 
+    @NotNull(message = "Password should be not null")
     private String password;
 
+    @NotNull(message = "Role should be not null")
     private String role;
 
     @NotNull(message = "Name should be not null")

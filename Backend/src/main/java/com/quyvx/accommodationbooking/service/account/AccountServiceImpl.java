@@ -38,4 +38,22 @@ public class AccountServiceImpl implements AccountService{
         throw new RuntimeException("Account is not found for the id " + id);
     }
 
+    @Override
+    public Account findByPhone(String phone) {
+        Optional<Account> account = accountRepository.findByPhone(phone);
+        if(account.isPresent()){
+            return account.get();
+        }
+        throw new RuntimeException("Account is not found for the phone " + phone);
+    }
+
+    @Override
+    public Account findByUsername(String username) {
+        Optional<Account> account = accountRepository.findByUsername(username);
+        if(account.isPresent()){
+            return account.get();
+        }
+        throw new RuntimeException("Account is not found for the username " + username);
+    }
+
 }

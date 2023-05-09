@@ -1,17 +1,16 @@
-package com.quyvx.accommodationbooking.dto;
+package com.quyvx.accommodationbooking.dto.account;
 
 import lombok.*;
 
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class AccountDto {
+public class ViewAccountDto {
+    private String userName;
+    private String role;
     private String name;
-
     private String address;
-
     private String phone;
-
 }

@@ -19,11 +19,8 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    @NotNull(message = "Name should not be null")
     private String name;
 
-    @NotNull(message = "Location should not be null")
     private String location;
 
     private float score = 0;
@@ -34,7 +31,6 @@ public class Hotel {
     @Column(name = "detail_description")
     private String detailDescription;
 
-    @NotNull(message = "Assess should not be null")
     private int assess;
 
     @Column(name = "avatar_hotel")
@@ -49,5 +45,6 @@ public class Hotel {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
 
 }

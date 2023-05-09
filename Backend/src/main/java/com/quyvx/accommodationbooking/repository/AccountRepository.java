@@ -13,4 +13,6 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, L
     Optional<Account> findById(Long id);
 
     Optional<Account> findByUsername(String username);
+
+    Optional<Account> findByPhone(String phone);
 }
