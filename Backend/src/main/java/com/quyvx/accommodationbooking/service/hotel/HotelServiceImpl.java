@@ -3,6 +3,7 @@ package com.quyvx.accommodationbooking.service.hotel;
 import com.quyvx.accommodationbooking.model.Hotel;
 import com.quyvx.accommodationbooking.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,10 @@ public class HotelServiceImpl implements HotelService{
     @Override
     public List<Hotel> findByAccountId(Long account_id, Pageable pageable) {
         return hotelRepository.findByAccountId(account_id, pageable);
+    }
+
+    @Override
+    public Page<Hotel> findAll(Pageable pageable) {
+        return hotelRepository.findAll(pageable);
     }
 }

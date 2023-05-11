@@ -1,7 +1,6 @@
 package com.quyvx.accommodationbooking.controller;
 
-import com.quyvx.accommodationbooking.dto.hotel.HotelDto;
-import com.quyvx.accommodationbooking.dto.hotel.ViewHotelDto;
+import com.quyvx.accommodationbooking.dto.HotelDto;
 import com.quyvx.accommodationbooking.model.Account;
 import com.quyvx.accommodationbooking.model.Hotel;
 import com.quyvx.accommodationbooking.service.account.AccountService;
@@ -40,16 +39,16 @@ public class OwnerController {
     }
 
     @GetMapping("/allHotel/{id}")
-    public List<ViewHotelDto> getAllHotel(@PathVariable("id") Long id,
+    public List<HotelDto> getAllHotel(@PathVariable("id") Long id,
                                           @RequestParam(defaultValue = "0") Integer pageNumber,
-                                          @RequestParam(defaultValue = "2") Integer pageSize,
+                                          @RequestParam(defaultValue = "10") Integer pageSize,
                                           @RequestParam(defaultValue = "id") String sortBy
     ){
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
         List<Hotel> hotels = hotelService.findByAccountId(id, pageable);
-        List<ViewHotelDto> viewHotelDtos = new ArrayList<>();
+        List<HotelDto> hotelDtos = new ArrayList<>();
         for (Hotel hotel : hotels){
-            ViewHotelDto tempHotel = new ViewHotelDto();
+            HotelDto tempHotel = new HotelDto();
             tempHotel.setId(hotel.getId());
             tempHotel.setNameHotel(hotel.getName());
             tempHotel.setLocation(hotel.getLocation());
@@ -57,10 +56,11 @@ public class OwnerController {
             tempHotel.setShortDescription(hotel.getShortDescription());
             tempHotel.setDetailDescription(hotel.getDetailDescription());
             tempHotel.setAssess(hotel.getAssess());
+            tempHotel.setAvatarHotel(hotel.getAvatarHotel());
             tempHotel.setNumberRating(hotel.getNumberRating());
-            viewHotelDtos.add(tempHotel);
+            hotelDtos.add(tempHotel);
         }
-        return viewHotelDtos;
+        return hotelDtos;
     }
 
 }

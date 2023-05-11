@@ -1,4 +1,4 @@
-package com.quyvx.accommodationbooking.dto.hotel;
+package com.quyvx.accommodationbooking.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -9,13 +9,16 @@ import lombok.*;
 @Getter
 @Setter
 public class HotelDto {
+    private Long id;
     @NotNull(message = "Name Hotel should not be null")
     private String nameHotel;
     @NotNull(message = "Location should not be null")
     private String location;
+    private float score;
     private String shortDescription;
     private String detailDescription;
     @NotNull(message = "Assess should not be null")
     private int assess;
     private String avatarHotel;
+    private int numberRating;
 }
