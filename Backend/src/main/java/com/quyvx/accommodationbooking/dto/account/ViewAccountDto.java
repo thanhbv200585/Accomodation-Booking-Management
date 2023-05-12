@@ -1,5 +1,6 @@
 package com.quyvx.accommodationbooking.dto.account;
 
+import com.quyvx.accommodationbooking.model.Role;
 import lombok.*;
 
 @Getter
@@ -9,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 public class ViewAccountDto {
     private String userName;
-    private String role;
+    private Role role;
     private String name;
     private String address;
     private String phone;

@@ -10,13 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/owner")
+@RequestMapping("/api/owner")
 public class OwnerController {
 
     @Autowired
@@ -25,6 +26,7 @@ public class OwnerController {
     private AccountService accountService;
 
     @PostMapping("/newHotel/{id}")
+    @PreAuthorize("hasAuthority('ROLE_OWNER')")
     public String createHotel(@PathVariable("id") Long id, @RequestBody @Valid HotelDto hotelDto){
         Account account = accountService.findById(id);
         Hotel hotel = new Hotel();
@@ -39,6 +41,7 @@ public class OwnerController {
     }
 
     @GetMapping("/allHotel/{id}")
+    @PreAuthorize("hasAuthority('ROLE_OWNER')")
     public List<HotelDto> getAllHotel(@PathVariable("id") Long id,
                                           @RequestParam(defaultValue = "0") Integer pageNumber,
                                           @RequestParam(defaultValue = "10") Integer pageSize,
