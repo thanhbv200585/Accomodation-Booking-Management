@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -37,6 +37,19 @@
   }
 }
 
+.home-page {
+
+}
+
+.header_wrapper {
+  background-color: #003580
+}
+.header, .search_wrapper {
+  width: 80%;
+  margin: auto;
+}
+
+
 .header > div{
   background-color: #003580;
   padding: 1rem;
@@ -53,7 +66,7 @@
   margin: auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -63,15 +76,23 @@
   gap: 0.5rem;
   justify-content: center;
   list-style: none;
+  font-size: 24px;
 }
 
 button {
   cursor: pointer;
 }
+
+li > button {
+  font-size: 24px;
+  border-radius: 2px;
+
+}
 .theme {
   background-color: #003580;
   color: #fff;
   border: none;
+  padding: 0.5rem;
 }
 
 .theme:hover {
@@ -82,9 +103,59 @@ button {
   background-color: #fff;
   color: #003580;
   border: 1px solid rgba(0, 53, 128, 0.5);
+  padding: 0.5rem;
 }
 
+.dark:hover {
+  background-color: rgb(234, 237, 244);
+}
 a {
   color: inherit;
   text-decoration: none;
 }
+
+form {
+  display: flex;
+  align-items: center;
+}
+
+form > div > input, .people {
+  border-radius: 2px;
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 5px;
+}
+
+.search form > div > button {
+  border-radius: 2px;
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  padding-left: 5px;
+  background-color: #0071c2;
+  color: #fff;
+  padding: 0 1rem;
+}
+.location {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.date {
+  display: flex;
+  flex: 0 0 27%;
+  border-radius: 0px; 
+  height: 40px;
+}
+
+.people {
+  display: flex;
+  flex: 0 0 27%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  /* column-gap: 5% ; 
+} */
