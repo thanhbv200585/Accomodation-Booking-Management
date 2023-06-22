@@ -223,8 +223,8 @@ const RegisterPage = () => {
             <a a style={{ color: "blue" }}>Terms &<br></br>conditions</a> 
             and <a style={{ color: "blue" }}>Privacy statement</a>
           </p>
-          <hr style={{ width: "30%", marginBottom: "17px", margin:"auto" }} />
-          <p>
+          <hr style={{ width: "30%", margin:"auto" }} />
+          <p className='m-2'>
             All rights reserved.
             Copyright (2006 - 2023) - Booking.com™
           </p>
