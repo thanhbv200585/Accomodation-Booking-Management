@@ -46,6 +46,7 @@ const RegisterPage = () => {
       phone,
     };
 
+    console.log(payload)
     try {
       // Gửi dữ liệu đăng ký người dùng đến server
       const response = await axios.post('http://localhost:8082/api/guest/register', payload);
@@ -57,6 +58,7 @@ const RegisterPage = () => {
         setErrorMessage('Fail Registration');
         setShowModal(true);
       }
+      console.log(response)
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('Error when send registration information');
@@ -140,9 +142,9 @@ const RegisterPage = () => {
                 onChange={(e) => setRole(e.target.value)}
               >
                 <option value="">Select role</option>
-                <option value="admin">Admin</option>
-                <option value="customer">Customer</option>
-                <option value="hotelowner">Hotel Owner</option>
+                <option value="ADMIN">Admin</option>
+                <option value="CUSTOMER">Customer</option>
+                <option value="OWNER">Hotel Owner</option>
               </Form.Control>
             </Col>
           </Form.Group>
