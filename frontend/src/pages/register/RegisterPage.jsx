@@ -4,8 +4,12 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
 import NavLR from '../../components/navLogigRegister/NavLR';
+import { useNavigate } from 'react-router-dom';
+
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -54,6 +58,8 @@ const RegisterPage = () => {
       // Kiểm tra phản hồi từ server
       if (response.status === 200) {
         setShowModal(true);
+        // Chuyển hướng về trang login sau khi đăng ký thành công
+        navigate('/login');
       } else {
         setErrorMessage('Fail Registration');
         setShowModal(true);
