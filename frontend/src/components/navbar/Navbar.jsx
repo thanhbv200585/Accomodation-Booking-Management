@@ -1,11 +1,16 @@
-import "./navbar.css"
-import { Link } from 'react-router-dom';
-
+import "./navbar.css";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="navbar">
       <div className="navContainer">
-        <span className="logo">l am a booking</span>
+        <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+        <span className="logo">lamabooking</span>
+      </Link>
         <div className="navItems">
           <Link to="http://localhost:3000/api/guest/register" className="navLink m-2 text-decoration-none">
             Register
@@ -16,7 +21,7 @@ const Navbar = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
