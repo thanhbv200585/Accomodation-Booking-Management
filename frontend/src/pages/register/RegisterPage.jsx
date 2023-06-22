@@ -48,7 +48,7 @@ const RegisterPage = () => {
 
     try {
       // Gửi dữ liệu đăng ký người dùng đến server
-      const response = await axios.post('http://localhost:3000/api/guest/register', payload);
+      const response = await axios.post('http://localhost:8082/api/guest/register', payload);
 
       // Kiểm tra phản hồi từ server
       if (response.status === 200) {
@@ -79,10 +79,8 @@ const RegisterPage = () => {
   return (
     <Container>
       <NavLR/>
-      <h2 className='m-5 fw-bold'>Create Account</h2>
-      <Form onSubmit={handleSubmit}
-
-      >
+      <h2 className='m-5 fw-bold text-center'>Create Account</h2>
+      <Form onSubmit={handleSubmit}>
         <Form.Group as={Row} controlId="username" className="mb-3">
           <Form.Label column sm={3} className='fw-bold'>Use name</Form.Label>
           <Col sm={6}>
