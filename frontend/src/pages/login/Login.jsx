@@ -6,6 +6,8 @@ import "./login.css";
 import NavLR from "../../components/navLogigRegister/NavLR";
 import { Container } from "@mui/material";
 import { Button, Form, Row, Col } from 'react-bootstrap';
+import FooterLR from "../../components/footerLR/FooterLR";
+
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -100,7 +102,7 @@ const Login = () => {
         </Col>
       </Row>
     </Container >
-
+    <FooterLR/>
     </>
   );
 };

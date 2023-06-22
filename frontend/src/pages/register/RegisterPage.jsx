@@ -5,7 +5,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
 import NavLR from '../../components/navLogigRegister/NavLR';
 import { useNavigate } from 'react-router-dom';
-
+import FooterLR from '../../components/footerLR/FooterLR';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -225,18 +225,7 @@ const RegisterPage = () => {
           </Modal.Footer>
         </Modal>
 
-        <div className='m-5 fs-6 text-center'>
-          <p>
-            By signing in or creating an account, you agree with our
-            <a a style={{ color: "blue" }}>Terms &<br></br>conditions</a> 
-            and <a style={{ color: "blue" }}>Privacy statement</a>
-          </p>
-          <hr style={{ width: "30%", margin:"auto" }} />
-          <p className='m-2'>
-            All rights reserved.
-            Copyright (2006 - 2023) - Booking.com™
-          </p>
-        </div>
+        <FooterLR/>
 
 
 
