@@ -3,6 +3,8 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./login.css";
+import NavLR from "../../components/navLogigRegister/NavLR";
+import { Container } from "@mui/material";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -32,28 +34,31 @@ const Login = () => {
 
 
   return (
-    <div className="login">
-      <div className="lContainer">
-        <input
-          type="text"
-          placeholder="username"
-          id="username"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <button disabled={loading} onClick={handleClick} className="lButton">
-          Login
-        </button>
-        {error && <span>{error.message}</span>}
+    <Container>
+      <NavLR />
+      <div className="login">
+        <div className="lContainer">
+          <input
+            type="text"
+            placeholder="username"
+            id="username"
+            onChange={handleChange}
+            className="lInput"
+          />
+          <input
+            type="password"
+            placeholder="password"
+            id="password"
+            onChange={handleChange}
+            className="lInput"
+          />
+          <button disabled={loading} onClick={handleClick} className="lButton">
+            Login
+          </button>
+          {error && <span>{error.message}</span>}
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

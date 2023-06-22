@@ -3,6 +3,7 @@ import { Form, FormGroup, Button, Modal, Container, Row, Col } from 'react-boots
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
+import NavLR from '../../components/navLogigRegister/NavLR';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -77,6 +78,7 @@ const RegisterPage = () => {
   };
   return (
     <Container>
+      <NavLR/>
       <h2 className='m-5 fw-bold'>Create Account</h2>
       <Form onSubmit={handleSubmit}
 
