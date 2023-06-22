@@ -77,26 +77,27 @@ const RegisterPage = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
   return (
-    <Container>
-      <NavLR/>
+    <>
+      <NavLR />
       <h2 className='m-5 fw-bold text-center'>Create Account</h2>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group as={Row} controlId="username" className="mb-3">
-          <Form.Label column sm={3} className='fw-bold'>Use name</Form.Label>
-          <Col sm={6}>
-            <Form.Control
-              className="form-control-sm"
-              type="text"
-              placeholder="Enter use name"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </Col>
-        </Form.Group>
+      <Container>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group as={Row} controlId="username" className="mb-3">
+            <Form.Label column sm={3} className='fw-bold'>Use name</Form.Label>
+            <Col sm={6}>
+              <Form.Control
+                className="form-control-sm"
+                type="text"
+                placeholder="Enter use name"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </Col>
+          </Form.Group>
 
-        <Form.Group as={Row} controlId="password" className="mb-3">
-          <Form.Label column sm={3} className='fw-bold'>Password</Form.Label>
-          <Col sm={6}>
+          <Form.Group as={Row} controlId="password" className="mb-3">
+            <Form.Label column sm={3} className='fw-bold'>Password</Form.Label>
+            <Col sm={6}>
               <Form.Control
                 className="form-control-sm"
                 type={passwordVisible ? "text" : "password"}
@@ -104,118 +105,135 @@ const RegisterPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              
-          </Col>
-          <Col sm={1}>
-          <div className="password-toggle-icon" onClick={togglePasswordVisibility}>
+
+            </Col>
+            <Col sm={1}>
+              <div className="password-toggle-icon" onClick={togglePasswordVisibility}>
                 {passwordVisible ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
               </div>
-          </Col>
-        </Form.Group>
+            </Col>
+          </Form.Group>
 
-        <Form.Group as={Row} controlId="confirmPassword" className="mb-3">
-          <Form.Label column sm={3} className='fw-bold'>Confirm password</Form.Label>
-          <Col sm={6}>
-            <Form.Control
-              className="form-control-sm"
-              type={confirmPasswordVisible ? "text" : "password"}
-              placeholder="Confirm password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </Col>
-          <Col sm={1}>
-          <div className="password-toggle-icon" onClick={toggleConfirmPasswordVisibility}>
+          <Form.Group as={Row} controlId="confirmPassword" className="mb-3">
+            <Form.Label column sm={3} className='fw-bold'>Confirm password</Form.Label>
+            <Col sm={6}>
+              <Form.Control
+                className="form-control-sm"
+                type={confirmPasswordVisible ? "text" : "password"}
+                placeholder="Confirm password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </Col>
+            <Col sm={1}>
+              <div className="password-toggle-icon" onClick={toggleConfirmPasswordVisibility}>
                 {confirmPasswordVisible ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
-          </div>
-          </Col>
-        </Form.Group>
+              </div>
+            </Col>
+          </Form.Group>
 
-        <Form.Group as={Row} controlId="role" className="mb-3">
-          <Form.Label column sm={3} className='fw-bold'>Role</Form.Label>
-          <Col sm={6}>
-            <Form.Control
-              className="form-control-sm" as="select" value={role}
-              onChange={(e) => setRole(e.target.value)}
-            >
-              <option value="">Select role</option>
-              <option value="admin">Admin</option>
-              <option value="customer">Customer</option>
-              <option value="hotelowner">Hotel Owner</option>
-            </Form.Control>
-          </Col>
-        </Form.Group>
+          <Form.Group as={Row} controlId="role" className="mb-3">
+            <Form.Label column sm={3} className='fw-bold'>Role</Form.Label>
+            <Col sm={6}>
+              <Form.Control
+                className="form-control-sm" as="select" value={role}
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option value="">Select role</option>
+                <option value="admin">Admin</option>
+                <option value="customer">Customer</option>
+                <option value="hotelowner">Hotel Owner</option>
+              </Form.Control>
+            </Col>
+          </Form.Group>
 
-        <Form.Group as={Row} controlId="name" className="mb-3">
-          <Form.Label column sm={3} className='fw-bold'>Full name</Form.Label>
-          <Col sm={6}>
-            <Form.Control
-              className="form-control-sm"
-              type="text"
-              placeholder="Enter your full name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Col>
-        </Form.Group>
+          <Form.Group as={Row} controlId="name" className="mb-3">
+            <Form.Label column sm={3} className='fw-bold'>Full name</Form.Label>
+            <Col sm={6}>
+              <Form.Control
+                className="form-control-sm"
+                type="text"
+                placeholder="Enter your full name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Col>
+          </Form.Group>
 
-        <Form.Group as={Row} controlId="address" className="mb-3">
-          <Form.Label column sm={3} className='fw-bold'>Address</Form.Label>
-          <Col sm={6}>
-            <Form.Control
-              className="form-control-sm"
-              type="text"
-              placeholder="Enter your address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </Col>
-        </Form.Group>
+          <Form.Group as={Row} controlId="address" className="mb-3">
+            <Form.Label column sm={3} className='fw-bold'>Address</Form.Label>
+            <Col sm={6}>
+              <Form.Control
+                className="form-control-sm"
+                type="text"
+                placeholder="Enter your address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </Col>
+          </Form.Group>
 
-        <Form.Group as={Row} controlId="phone" className="mb-3">
-          <Form.Label column sm={3} className='fw-bold'>Phone</Form.Label>
-          <Col sm={6}>
-            <Form.Control
-              className="form-control-sm"
-              type="text"
-              placeholder="Enter your phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </Col>
-        </Form.Group>
-        <Form.Group as={Row} className="mb-3">
-          <Col sm={{ span: 6, offset: 3 }}>
-            <Button variant="primary" type="submit" className='col-12'>
-              Sign up
+          <Form.Group as={Row} controlId="phone" className="mb-3">
+            <Form.Label column sm={3} className='fw-bold'>Phone</Form.Label>
+            <Col sm={6}>
+              <Form.Control
+                className="form-control-sm"
+                type="text"
+                placeholder="Enter your phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} className="mb-3">
+            <Col sm={{ span: 6, offset: 3 }}>
+              <Button variant="primary" type="submit" className='col-12'>
+                Sign up
+              </Button>
+            </Col>
+          </Form.Group>
+
+        </Form>
+
+        <Modal
+          show={showModal}
+          onHide={handleCloseModal}
+          backdrop="static"
+          keyboard={false}
+          className="register-modal"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Check out</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {!errorMessage && <p className="success-message">Successful Registration</p>}
+          </Modal.Body>
+          <Modal.Footer>
+
+            <Button variant="primary" onClick={handleCloseModal}>
+              OK
             </Button>
-          </Col>
-        </Form.Group>
+          </Modal.Footer>
+        </Modal>
 
-      </Form>
+        <div className='m-5 fs-6 text-center'>
+          <p>
+            By signing in or creating an account, you agree with our
+            <a a style={{ color: "blue" }}>Terms &<br></br>conditions</a> 
+            and <a style={{ color: "blue" }}>Privacy statement</a>
+          </p>
+          <hr style={{ width: "30%", marginBottom: "17px", margin:"auto" }} />
+          <p>
+            All rights reserved.
+            Copyright (2006 - 2023) - Booking.com™
+          </p>
+        </div>
 
-      <Modal
-        show={showModal}
-        onHide={handleCloseModal}
-        backdrop="static"
-        keyboard={false}
-        className="register-modal"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Check out</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-          {!errorMessage && <p className="success-message">Successful Registration</p>}
-        </Modal.Body>
-        <Modal.Footer>
 
-          <Button variant="primary" onClick={handleCloseModal}>
-            OK
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Container>
+
+      </Container>
+    </>
   );
 };
 

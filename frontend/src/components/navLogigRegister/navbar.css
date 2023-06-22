@@ -1,19 +1,18 @@
-.navbar{
+.navbar {
   height: 50px;
   background-color: #003580;
   display: flex;
   justify-content: center;
 }
 
-.navContainer{
-  width: 100%;
-  max-width: 1024px;
+.navContainer {
+  flex-grow: 1; /* Thêm thuộc tính flex-grow để chiếm toàn bộ độ rộng của navbar */
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.logo{
+.logo {
   font-weight: 500;
 }
