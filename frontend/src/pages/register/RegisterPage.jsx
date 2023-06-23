@@ -8,10 +8,15 @@ import { useNavigate } from 'react-router-dom';
 import FooterLR from '../../components/footerLR/FooterLR';
 
 
+
+function isPhoneNumber(phoneNumber) {
+  const regex = /^(?:\+84|0[123456789]|1[0123456789])[0-9]{8,9}$/;
+  return regex.test(phoneNumber);
+}
+
+
 const RegisterPage = () => {
   const navigate = useNavigate();
-
-
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -44,6 +49,12 @@ const RegisterPage = () => {
       return;
     }
 
+    //kiểm tra số điện thoại
+    if (!isPhoneNumber(phone)) {
+      setErrorMessage('Invalid phone number');
+      setShowModal(true);
+      return;
+    }
     // Tạo payload từ dữ liệu đăng ký
     const payload = {
       username,
@@ -62,8 +73,7 @@ const RegisterPage = () => {
       // Kiểm tra phản hồi từ server
       if (response.status === 200) {
         setShowSuccessModal(true);
-        // Chuyển hướng về trang login sau khi đăng ký thành công
-        
+
       } else {
         setErrorMessage('Fail Registration');
         setShowModal(true);
@@ -222,7 +232,7 @@ const RegisterPage = () => {
           <Modal.Footer>
 
             <Button variant="primary"
-            onClick={handleCloseModal}
+              onClick={handleCloseModal}
             >
               OK
             </Button>
@@ -233,16 +243,16 @@ const RegisterPage = () => {
           show={showSuccessModal}
           backdrop="static"
           keyboard={false}
-          centered 
+          centered
         >
           <Modal.Header className='justify-content-center'>
             <Modal.Title>Successful Registration</Modal.Title>
           </Modal.Header>
           <Modal.Footer className="justify-content-center">
             <Button variant="primary"
-            onClick={() => {
-              setShowSuccessModal(false)
-              navigate('/login')
+              onClick={() => {
+                setShowSuccessModal(false)
+                navigate('/login')
               }}>
               OK
             </Button>
@@ -250,8 +260,6 @@ const RegisterPage = () => {
         </Modal>
 
         <FooterLR />
-
-
 
       </Container>
     </>
