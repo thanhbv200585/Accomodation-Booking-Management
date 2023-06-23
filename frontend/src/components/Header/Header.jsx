@@ -16,6 +16,7 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
+import "bootstrap/dist/css/bootstrap.css";
 
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
@@ -151,6 +152,7 @@ const Header = ({ type }) => {
                           +
                         </button>
                       </div>
+                      
                     </div>
                     <div className="optionItem">
                       <span className="optionText">Children</span>
@@ -193,6 +195,14 @@ const Header = ({ type }) => {
                           +
                         </button>
                       </div>
+                    </div>
+                    <div className="text-center m-3">
+                    <button
+                    className="full-width-button btn btn-outline-primary"
+                    onClick={() => setOpenOptions(!openOptions)}
+                    >
+                      Done
+                    </button>
                     </div>
                   </div>
                 )}

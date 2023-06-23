@@ -126,3 +126,6 @@
 .optionCounterButton:disabled {
   cursor: not-allowed;
 }
+.full-width-button {
+  width: 100%;
+}
