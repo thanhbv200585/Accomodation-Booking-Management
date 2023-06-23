@@ -17,10 +17,76 @@ const List = () => {
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
 
-  const { data, loading, error, reFetch } = useFetch(
+  const { data1, loading, error, reFetch } = useFetch(
     `/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`
   );
-
+    let data = [{
+      id:"1",
+      nameHotel:"Crescendo Studio & Cafe",
+      location:"TayHo District, Ha Noi, Vietnam",
+      score:"",
+      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
+      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
+      assess: 5,
+      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
+      numberRatting:""
+    }, 
+    {
+      id:"1",
+      nameHotel:"Crescendo Studio & Cafe",
+      location:"TayHo District, Ha Noi, Vietnam",
+      score:"",
+      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
+      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
+      assess: 5,
+      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
+      numberRatting:""
+    },
+    {
+      id:"1",
+      nameHotel:"Crescendo Studio & Cafe",
+      location:"TayHo District, Ha Noi, Vietnam",
+      score:"",
+      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
+      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
+      assess: 5,
+      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
+      numberRatting:""
+    },
+    {
+      id:"1",
+      nameHotel:"Crescendo Studio & Cafe",
+      location:"TayHo District, Ha Noi, Vietnam",
+      score:"",
+      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
+      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
+      assess: 5,
+      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
+      numberRatting:""
+    },
+    {
+      id:"1",
+      nameHotel:"Crescendo Studio & Cafe",
+      location:"TayHo District, Ha Noi, Vietnam",
+      score:"",
+      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
+      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
+      assess: 5,
+      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
+      numberRatting:""
+    },
+    {
+      id:"1",
+      nameHotel:"Crescendo Studio & Cafe",
+      location:"TayHo District, Ha Noi, Vietnam",
+      score:"",
+      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
+      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
+      assess: 5,
+      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
+      numberRatting:""
+    }
+  ]
   const handleClick = () => {
     reFetch();
   };
@@ -111,7 +177,7 @@ const List = () => {
             ) : (
               <>
                 {data.map((item) => (
-                  <SearchItem item={item} key={item._id} />
+                  <SearchItem item={item} key={item.id} />
                 ))}
               </>
             )}
