@@ -7,8 +7,11 @@ import NavLR from '../../components/navLogigRegister/NavLR';
 import { useNavigate } from 'react-router-dom';
 import FooterLR from '../../components/footerLR/FooterLR';
 
+
 const RegisterPage = () => {
   const navigate = useNavigate();
+
+
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +24,7 @@ const RegisterPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false); // Trạng thái hiển thị mật khẩu
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false); // Trạng thái hiển thị xác nhận mật khẩu
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
 
   const handleSubmit = async (e) => {
@@ -57,9 +61,9 @@ const RegisterPage = () => {
 
       // Kiểm tra phản hồi từ server
       if (response.status === 200) {
-        setShowModal(true);
+        setShowSuccessModal(true);
         // Chuyển hướng về trang login sau khi đăng ký thành công
-        navigate('/login');
+        
       } else {
         setErrorMessage('Fail Registration');
         setShowModal(true);
@@ -67,8 +71,9 @@ const RegisterPage = () => {
       console.log(response)
     } catch (error) {
       console.error('Error:', error);
-      setErrorMessage('Error when send registration information');
+      setErrorMessage(error.response.data.message);
       setShowModal(true);
+
     }
   };
 
@@ -205,10 +210,7 @@ const RegisterPage = () => {
 
         <Modal
           show={showModal}
-          onHide={handleCloseModal}
           backdrop="static"
-          keyboard={false}
-          className="register-modal"
         >
           <Modal.Header closeButton>
             <Modal.Title>Check out</Modal.Title>
@@ -219,13 +221,35 @@ const RegisterPage = () => {
           </Modal.Body>
           <Modal.Footer>
 
-            <Button variant="primary" onClick={handleCloseModal}>
+            <Button variant="primary"
+            onClick={handleCloseModal}
+            >
               OK
             </Button>
           </Modal.Footer>
         </Modal>
 
-        <FooterLR/>
+        <Modal
+          show={showSuccessModal}
+          backdrop="static"
+          keyboard={false}
+          centered 
+        >
+          <Modal.Header className='justify-content-center'>
+            <Modal.Title>Successful Registration</Modal.Title>
+          </Modal.Header>
+          <Modal.Footer className="justify-content-center">
+            <Button variant="primary"
+            onClick={() => {
+              setShowSuccessModal(false)
+              navigate('/login')
+              }}>
+              OK
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <FooterLR />
 
 
 
