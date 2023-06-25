@@ -7,8 +7,8 @@ import moment from 'moment';
 const { RangePicker } = DatePicker;
 
 const Search = () => {
-    const [location, setLocation] = useState('');
-    const [dates, setDates] = useState([])
+  const [location, setLocation] = useState('');
+  const [dates, setDates] = useState([])
 
   return (
     <div className="search_wrapper">
@@ -17,19 +17,19 @@ const Search = () => {
           <input placeholder="Where would you like to go?" value={location}></input>
         </div>
         <div className="date">
-        <RangePicker
-      style={{height: "100%"}}
-        onChange={(values) => {
-          setDates(
-            values.map((item) => {  
-              return moment(item.$d).format("YYYY-DD-MM");
-            })
-          );
-        }}
-      />
+          <RangePicker
+            style={{ height: "100%" }}
+            onChange={(values) => {
+              setDates(
+                values.map((item) => {
+                  return moment(item.$d).format("YYYY-DD-MM");
+                })
+              );
+            }}
+          />
         </div>
         <div className="button">
-          <button onClick={() => {}}>
+          <button onClick={() => { }}>
             <a href="/search">Search</a>
           </button>
         </div>

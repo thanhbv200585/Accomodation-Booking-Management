@@ -3,10 +3,10 @@ import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./login.css";
-import NavLR from "../../components/navLogigRegister/NavLR";
+import NavLR from "../../components/navbar/NavLR";
 import { Container } from "@mui/material";
 import { Button, Form, Row, Col } from 'react-bootstrap';
-import FooterLR from "../../components/footerLR/FooterLR";
+import FooterLR from "../../components/FooterLR";
 
 
 const Login = () => {
@@ -29,7 +29,10 @@ const Login = () => {
     try {
       const res = await axios.post(url, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-      navigate("/")
+      console.log(res)
+      navigate(`/customer/${res.data.accountId}`,  { 
+        state: { token: res.data.token } 
+      })
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
@@ -84,7 +87,7 @@ const Login = () => {
       </Row>
       <Row className="justify-content-center text-center mt-4">
         <Col xs="8" sm="6" md="4">
-          <Link to="/api/guest/register"
+          <Link to="/guest/register"
           className="p-2"
           style={{background: "green", color:"white",
           textDecoration:"none", borderRadius:"5px"}}>

@@ -3,9 +3,9 @@ import { Form, FormGroup, Button, Modal, Container, Row, Col } from 'react-boots
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
-import NavLR from '../../components/navLogigRegister/NavLR';
+import NavLR from '../../components/navbar/NavLR';
 import { useNavigate } from 'react-router-dom';
-import FooterLR from '../../components/footerLR/FooterLR';
+import FooterLR from '../../components/FooterLR';
 
 
 
