@@ -65,10 +65,10 @@ const RegisterPage = () => {
       phone,
     };
 
-    console.log(payload)
+    let response;
     try {
       // Gửi dữ liệu đăng ký người dùng đến server
-      const response = await axios.post('http://localhost:8082/api/guest/register', payload);
+      response = await axios.post('http://localhost:8082/api/guest/register', payload);
 
       // Kiểm tra phản hồi từ server
       if (response.status === 200) {
@@ -78,9 +78,7 @@ const RegisterPage = () => {
         setErrorMessage('Fail Registration');
         setShowModal(true);
       }
-      console.log(response)
     } catch (error) {
-      console.error('Error:', error);
       setErrorMessage(error.response.data.message);
       setShowModal(true);
 
@@ -106,7 +104,7 @@ const RegisterPage = () => {
       <Container>
         <Form onSubmit={handleSubmit}>
           <Form.Group as={Row} controlId="username" className="mb-3">
-            <Form.Label column sm={3} className='fw-bold'>Use name</Form.Label>
+            <Form.Label column sm={3} className='fw-bold'>User name</Form.Label>
             <Col sm={6}>
               <Form.Control
                 className="form-control-sm"
