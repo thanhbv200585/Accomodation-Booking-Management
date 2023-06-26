@@ -1,11 +1,4 @@
-import {
-  faBed,
-  faCalendarDays,
-  faCar,
-  faPerson,
-  faPlane,
-  faTaxi,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBed, faCalendarDays, faCar, faPerson, faPlane, faTaxi } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
 import { DateRange } from "react-date-range";
@@ -54,6 +47,14 @@ const Header = ({ type }) => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", { state: { destination, dates, options } });
   };
+  const [active, setActive] = useState('Stays')
+  const labels = [
+    { name: "Stays", icon: faBed },
+    { name: "Flights", icon: faPlane },
+    { name: "Car rentals", icon: faCar },
+    { name: "Attractions", icon: faBed },
+    { name: "Airport taxix", icon: faTaxi }
+  ]
 
   return (
     <div className="header">
@@ -63,26 +64,14 @@ const Header = ({ type }) => {
         }
       >
         <div className="headerList">
-          <div className="headerListItem active">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Stays</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>Flights</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faCar} />
-            <span>Car rentals</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Attractions</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faTaxi} />
-            <span>Airport taxis</span>
-          </div>
+          {labels.map(label => (
+            <div key={label.name}
+              className={`${active == label.name ? 'active' : ''} headerListItem`}
+              onClick={() => setActive(label.name)}>
+              <FontAwesomeIcon icon={label.icon} />
+              <span>{label.name}</span>
+            </div>
+          ))}
         </div>
         {type !== "list" && (
           <>
@@ -152,7 +141,7 @@ const Header = ({ type }) => {
                           +
                         </button>
                       </div>
-                      
+
                     </div>
                     <div className="optionItem">
                       <span className="optionText">Children</span>
@@ -197,12 +186,12 @@ const Header = ({ type }) => {
                       </div>
                     </div>
                     <div className="text-center m-3">
-                    <button
-                    className="full-width-button btn btn-outline-primary"
-                    onClick={() => setOpenOptions(!openOptions)}
-                    >
-                      Done
-                    </button>
+                      <button
+                        className="full-width-button btn btn-outline-primary"
+                        onClick={() => setOpenOptions(!openOptions)}
+                      >
+                        Done
+                      </button>
                     </div>
                   </div>
                 )}

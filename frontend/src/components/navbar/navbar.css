@@ -25,3 +25,6 @@
   cursor: pointer;
   color: #003580;
 }
+.cbg:hover{
+  background-color: rgb(145, 156, 225);
+}

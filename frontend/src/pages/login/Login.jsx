@@ -30,7 +30,7 @@ const Login = () => {
       const res = await axios.post(url, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       console.log(res)
-      navigate(`/customer/${res.data.accountId}`,  { 
+      navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`,  { 
         state: { token: res.data.token } 
       })
     } catch (err) {
