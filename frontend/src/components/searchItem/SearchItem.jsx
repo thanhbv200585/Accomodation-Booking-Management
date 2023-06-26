@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./searchItem.css";
 import { useEffect } from "react";
 import { SearchContext } from "../../context/SearchContext";
@@ -8,7 +8,7 @@ const assessScale = ['Poor', 'Fair', 'Good', "Very Good", 'Excellent'];
 
 const SearchItem = ({ item }) => { 
   
-  const { dates, dispatch } = useContext(SearchContext)
+  const { dates } = useContext(SearchContext)
 
   console.log(dates)
   console.log(item)
