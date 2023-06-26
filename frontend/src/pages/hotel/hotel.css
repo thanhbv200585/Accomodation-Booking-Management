@@ -149,3 +149,29 @@
   color: lightgray;
   cursor: pointer;
 }
+
+.table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.column {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.column-room {
+  width: 80%;
+}
+
+.column-price {
+  width: 20%;
+  font-weight: bold;
+}
+
+
+thead > tr > th {
+  position: sticky;
+  top: 0;
+  background-color: #2f2f2f;
+}

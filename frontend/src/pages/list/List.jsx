@@ -2,93 +2,42 @@ import "./list.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
-import useFetch from "../../hooks/useFetch";
+import axios from "axios";
+import { useContext } from "react";
+import { SearchContext } from "../../context/SearchContext";
 
 const List = () => {
   const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
-  const [dates, setDates] = useState(location.state.dates);
+  const [data, setData] = useState([])
+  const [destination, setDestination] = useState(location.state === null ? "" : location.state.destination);
+  const [dates, setDates] = useState(location.state === null ? "" : location.state.dates);
   const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
+  const [options, setOptions] = useState(location.state === null ? "" : location.state.options);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
 
-  const { data1, loading, error, reFetch } = useFetch(
-    `/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`
-  );
-    let data = [{
-      id:"1",
-      nameHotel:"Crescendo Studio & Cafe",
-      location:"TayHo District, Ha Noi, Vietnam",
-      score:"",
-      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
-      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
-      assess: 5,
-      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
-      numberRatting:""
-    }, 
-    {
-      id:"1",
-      nameHotel:"Crescendo Studio & Cafe",
-      location:"TayHo District, Ha Noi, Vietnam",
-      score:"",
-      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
-      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
-      assess: 5,
-      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
-      numberRatting:""
-    },
-    {
-      id:"1",
-      nameHotel:"Crescendo Studio & Cafe",
-      location:"TayHo District, Ha Noi, Vietnam",
-      score:"",
-      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
-      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
-      assess: 5,
-      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
-      numberRatting:""
-    },
-    {
-      id:"1",
-      nameHotel:"Crescendo Studio & Cafe",
-      location:"TayHo District, Ha Noi, Vietnam",
-      score:"",
-      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
-      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
-      assess: 5,
-      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
-      numberRatting:""
-    },
-    {
-      id:"1",
-      nameHotel:"Crescendo Studio & Cafe",
-      location:"TayHo District, Ha Noi, Vietnam",
-      score:"",
-      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
-      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
-      assess: 5,
-      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
-      numberRatting:""
-    },
-    {
-      id:"1",
-      nameHotel:"Crescendo Studio & Cafe",
-      location:"TayHo District, Ha Noi, Vietnam",
-      score:"",
-      shortDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. ",
-      detailDescription:"Set 3.3 km from West Lake, Crescendo Studio & Cafe offers 5-star accommodation in Hanoi and has a terrace, a restaurant and a bar. This 5-star hotel offers room service and a 24-hour front desk. The hotel features family rooms. Selected rooms also feature a kitchen with a fridge and a toaster. Guests at the hotel can enjoy a vegan breakfast. Quan Thanh Temple is 4.5 km from Crescendo Studio & Cafe, while Hanoi Old City Gate is 5 km from the property. The nearest airport is Noi Bai International Airport, 19 km from the accommodation.",
-      assess: 5,
-      avatarHotel:"https://lirp.cdn-website.com/11191c87/dms3rep/multi/opt/building1-feded8e1-1920w.jpg",
-      numberRatting:""
-    }
-  ]
-  const handleClick = () => {
-    reFetch();
+  const { dispatch } = useContext(SearchContext)
+  const loading = false;
+  const url = "http://localhost:8082/api/guest/hotels"
+
+  useEffect(() => {
+    axios.get(url).then(response => setData(response.data))
+      .catch((err) => console.error(err))
+  }, [])
+  
+  console.log(dates === "")
+
+  const handleClick = async () => {
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } })
+    await axios.get(url).then((response) => {
+        setData(response.data)
+      }).catch((error) => {
+        console.log("error", error)
+      })
   };
 
   return (
@@ -106,12 +55,16 @@ const List = () => {
             <div className="lsItem">
               <label>Check-in Date</label>
               <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                dates[0].startDate,
+                dates === "" ? new Date(): dates[0].startDate,
                 "MM/dd/yyyy"
-              )} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}</span>
+              )} to ${format(dates !== "" ? dates[0].endDate : new Date(), "MM/dd/yyyy")}`}</span>
               {openDate && (
                 <DateRange
-                  onChange={(item) => setDates([item.selection])}
+                  onChange={(item) => {
+                    console.log("item: ",item)
+                    console.log("dates: ", dates)
+                    setDates([item.selection])
+                  }}
                   minDate={new Date()}
                   ranges={dates}
                 />
