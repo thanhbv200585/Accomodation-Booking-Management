@@ -1,14 +1,19 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import "./login.css";
-import NavLR from "../../components/navbar/NavLR";
+import { AuthContext } from "../context/AuthContext";
+import NavLR from "../components/NavLR";
 import { Container } from "@mui/material";
 import { Button, Form, Row, Col } from 'react-bootstrap';
-import FooterLR from "../../components/FooterLR";
+import FooterLR from "../components/FooterLR";
 
-
+const dividerStyles = {
+  flexGrow: 1,
+  height: '1px',
+  backgroundColor: '#000',
+  border: 'none',
+  margin: '0 10px',
+};
 const Login = () => {
   const [credentials, setCredentials] = useState({
     username: undefined,
@@ -22,18 +27,18 @@ const Login = () => {
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
-
   const handleClick = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post(url, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-      console.log(res)
+      console.log("res of login in order to get id token: ", res)
       navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`,  { 
         state: { token: res.data.token } 
       })
     } catch (err) {
+      console.log("lỗi đăng nhập")
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
   };
@@ -52,7 +57,7 @@ const Login = () => {
                   type="text"
                   placeholder="username"
                   onChange={handleChange}
-                  className="lInput"
+                  className=""
                 />
               </Form.Group>
 
@@ -61,7 +66,8 @@ const Login = () => {
                   type="password"
                   placeholder="password"
                   onChange={handleChange}
-                  className="lInput"
+                  className=""
+                  autoComplete="on"
                 />
               </Form.Group>
 
@@ -78,10 +84,10 @@ const Login = () => {
         </Row>
         <Row className="justify-content-center">
           <Col xs="8" sm="6" md="4">
-          <div className="divider-container">
-            <hr className="divider" />
-            <span className="divider-text">or</span>
-            <hr className="divider" />
+          <div className="d-flex justify-content-center align-items-center">
+            <hr style={dividerStyles}/>
+            <span className="fs-5">or</span>
+            <hr style={dividerStyles}/>
           </div>
         </Col>
       </Row>

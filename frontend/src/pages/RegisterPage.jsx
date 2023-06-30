@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Form, FormGroup, Button, Modal, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Modal, Container, Row, Col } from 'react-bootstrap';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
-import NavLR from '../../components/navbar/NavLR';
+import NavLR from '../components/NavLR';
 import { useNavigate } from 'react-router-dom';
-import FooterLR from '../../components/FooterLR';
+import FooterLR from '../components/FooterLR';
 
 
 
@@ -14,11 +14,16 @@ function isPhoneNumber(phoneNumber) {
   return regex.test(phoneNumber);
 }
 
+function isValidUsername(username) {
+  const regex = /^[a-zA-Z0-9_]+$/;
+  return regex.test(username);
+}
 
 const RegisterPage = () => {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
+  console.log("re-render")
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('');
@@ -35,6 +40,11 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isValidUsername(username)) {
+      setErrorMessage('Invalid username, username only allow digit, letter and underscore');
+      setShowModal(true);
+      return;
+    }
     // Kiểm tra xem dữ liệu đã được điền vào form hay chưa
     if (!username || !password || !confirmPassword || !role || !name || !address || !phone) {
       setErrorMessage('Let fill all information');
@@ -127,6 +137,7 @@ const RegisterPage = () => {
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autocomplete = "on"
               />
 
             </Col>
@@ -146,6 +157,7 @@ const RegisterPage = () => {
                 placeholder="Confirm password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                autocomplete = "on"
               />
             </Col>
             <Col sm={1}>
