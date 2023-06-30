@@ -37,6 +37,8 @@ const Login = () => {
       navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`,  { 
         state: { token: res.data.token } 
       })
+      localStorage.setItem("user", res.data)
+      console.log(localStorage.getItem("user"))
     } catch (err) {
       console.log("lỗi đăng nhập")
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });

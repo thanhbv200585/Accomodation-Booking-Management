@@ -17,8 +17,6 @@ const List = () => {
   const [dates, setDates] = useState(location.state === null ? "" : location.state.dates);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state === null ? "" : location.state.options);
-  const [min, setMin] = useState(undefined);
-  const [max, setMax] = useState(undefined);
 
   const { dispatch } = useContext(SearchContext)
   const loading = false;
@@ -61,9 +59,8 @@ const List = () => {
               {openDate && (
                 <DateRange
                   onChange={(item) => {
-                    console.log("item: ",item)
-                    console.log("dates: ", dates)
                     setDates([item.selection])
+                    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } })
                   }}
                   minDate={new Date()}
                   ranges={dates}
@@ -73,26 +70,6 @@ const List = () => {
             <div className="lsItem">
               <label>Options</label>
               <div className="lsOptions">
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">
-                    Min price <small>per night</small>
-                  </span>
-                  <input
-                    type="number"
-                    onChange={(e) => setMin(e.target.value)}
-                    className="lsOptionInput"
-                  />
-                </div>
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">
-                    Max price <small>per night</small>
-                  </span>
-                  <input
-                    type="number"
-                    onChange={(e) => setMax(e.target.value)}
-                    className="lsOptionInput"
-                  />
-                </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Adult</span>
                   <input

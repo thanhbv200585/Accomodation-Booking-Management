@@ -18,7 +18,7 @@ function App() {
         <Route path="/account/:id/info" element={<Cusinfo/>}/>
         <Route path="/guest/register" element={<RegisterPage />} />
         <Route path="/hotels" element={<List/>}/>
-        <Route path="/hotels/1/detail" element={<Hotel/>}/>
+        <Route path="/hotels/:id" element={<Hotel/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/customer/:id" element={<Cushome/>}/>
       </Routes>

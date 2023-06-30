@@ -11,14 +11,13 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useState } from "react";
-import useFetch from "../../hooks/useFetch";
 import { useLocation, useNavigate} from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
 import axios from "axios";
 import { useEffect } from "react";
-import { da } from "date-fns/locale";
+import Room from "../room/Room";
 
 const Hotel = () => {
   const location = useLocation();
@@ -26,11 +25,22 @@ const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-
+  const [booking, setBooking] = useState(false);
+  const [selection, setSelection] = useState({});
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  // console.log(navigate);
-
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [openPopup, setOpenPopup] = useState(false);
+  const INITIAL_CLICKED_ROOM = {
+    "roomType": "",
+    "price": 0,
+    "description": "",
+    "service": [],
+    "numberRooms": 0,
+    "images": ""
+  }
+  const [clickedRoom, setClickedRoom] = useState(INITIAL_CLICKED_ROOM)
+  
   const [data,setData] = useState(
     {
       "id": null,
@@ -59,25 +69,50 @@ const Hotel = () => {
               "numberRooms": 0,
               "images": null
           }
-      ]
+        ], 
+      "roomNumber": {}
   });
-
 
 
   useEffect(()=>{
     const fetchData = async () => {
-      const url = `http://localhost:8082/api/guest/hotels/${id}/detail`
-      var apiData = await axios.get(url)
-      console.log(apiData.data);
+      const url = `http://localhost:8082/api/guest/hotels/${id}/details`
+      var apiData = await axios.post(url, {
+          checkIn: "2023-06-27",
+          checkOut: "2023-06-28"
+        }
+      )
+      console.log(apiData.data)
       setData(apiData.data)
+      console.log("data: ", data)
+      
     }
   fetchData();
 }, [])
 
-
+  useEffect(() => {
+    let total = 0;
+    data.rooms.map(room => {
+      if (selection[room.roomType] !== undefined) {
+        total += room.price * selection[room.roomType]
+      }
+    })
+    setTotalPrice(total * days);
+    console.log(totalPrice)
+  }, [selection])
   const {city, dates, options, dispatch } = useContext(SearchContext);
-  console.log(dates.length == 0)
-  const { item } = location.state
+
+  const listDownRoom = (room) => {
+    let list = [];
+    console.log(room)
+    for(let i = 0; i < 1; i++) {
+      list.push(
+        <option value={i}>{i}  (VND {room.price * i})</option>
+      )
+    }
+
+    return list;
+  }
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -86,7 +121,13 @@ const Hotel = () => {
     return diffDays;
   }
 
-  const days = dates.length != 0 ? dayDifference(dates[0].endDate, dates[0].startDate) : 1;
+  const getDays = (dates) => {
+    if (dates.length === 0) return 1;
+    var days = dayDifference(dates[0].endDate, dates[0].startDate);
+    if (days) return days;
+    else return 1;
+  }
+  const days = getDays(dates)
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -113,6 +154,11 @@ const Hotel = () => {
       navigate("/login");
     }
   };
+
+  const handleRoomClick = (room) => {
+    setOpenPopup(true);
+    setClickedRoom(room);
+  }
   return (
     <div>
       <Navbar />
@@ -155,10 +201,6 @@ const Hotel = () => {
               <span>{data === undefined ? "" : data.location}</span>
             </div>
 
-            {/* <span className="hotelPriceHighlight">
-              Book a stay over ${data.cheapestPrice} at this property and get a
-              free airport taxi
-            </span> */}
             <div className="hotelImages">
                 <div className="hotelImgWrapper">
                   <img
@@ -170,9 +212,6 @@ const Hotel = () => {
                 </div>
             </div>
 
-            {/* <span className="">
-              {data.detailDescription}
-            </span> */}
             <div className="hotelDetails">
               <div className="hotelDetailsTexts">
                 <h1 className="hotelTitle">{data.nameHotel}</h1>
@@ -184,10 +223,10 @@ const Hotel = () => {
                   Located in the real heart of Krakow, this property has an
                   excellent location score of {data.score}!
                 </span>
-                <h2>
-                  <b>${days * data.cheapestPrice * options.room}</b> ({days}{" "}
+                <h3>
+                  <b>VND {totalPrice}</b> ({days}{" "}
                   nights)
-                </h2>
+                </h3>
                 <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>
             </div>
@@ -198,23 +237,36 @@ const Hotel = () => {
                   <tr>
                     <th className="column">Accomodation type</th>
                     <th className="column">Price for {days} nights</th>
-                    <th className="column">Select amount</th>
-                    <th className="column">Booking</th>
+                    <th className="column">Price</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {data.rooms.map((room) => (
-                    <tr>
-                      <td className="column">{room.roomType}</td>
-                      <td className="column">{room.numberRooms}</td>
+                  {data.rooms.map((room, index) => {
+                  return (
+                    <tr key={index}>
+                      <td className="column"><button className="room-type" onClick={() => handleRoomClick(room)}>{room.roomType}</button></td>
+                      <td className="column">{
+                        <select name="numberRoom" onChange={(e)=> {
+                          setSelection({
+                              ...selection, 
+                              [room.roomType] : e.target.value.split(' ')[0]
+                            })
+                            console.log(selection)
+                        }}>
+                          {[...Array(data.roomNumber[room.roomType] !== undefined ? data.roomNumber[room.roomType] + 1 : 1).keys()].map((num) => (
+                            <option key={num}>{num}   (VND {num * room.price})</option>
+                        ))}
+                        </select>
+                      }</td>
                       <td className="column-price">VND {room.price}</td>
-                      {/* {room} */}
+                      <Room trigger={openPopup} setTrigger={setOpenPopup} data={clickedRoom}>
+                        {/* <h3>This is a room</h3> */}
+                      </Room>
                     </tr>
-                  ))}
-                  {/* <td className="column" rowSpan={data.rooms.length}> Booking</td> */}
-
+                  )})}
                 </tbody>
               </table>
+              
             </div>
           </div>
           <MailList />

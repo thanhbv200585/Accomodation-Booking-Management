@@ -42,6 +42,7 @@ const Header = ({ type }) => {
 
   const { dispatch } = useContext(SearchContext);
 
+  console.log(user)
   const handleSearch = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", { state: { destination, dates, options } });
@@ -52,7 +53,7 @@ const Header = ({ type }) => {
     { name: "Flights", icon: faPlane },
     { name: "Car rentals", icon: faCar },
     { name: "Attractions", icon: faBed },
-    { name: "Airport taxix", icon: faTaxi }
+    { name: "Airport taxi", icon: faTaxi }
   ]
 
   return (
@@ -81,7 +82,6 @@ const Header = ({ type }) => {
               Get rewarded for your travels – unlock instant savings of 10% or
               more with a free Lamabooking account
             </p>
-            {/* {!user && <button className="headerBtn">Sign in / Register</button>} */}
             <div className="headerSearch p-4">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
