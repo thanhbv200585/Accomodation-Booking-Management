@@ -37,7 +37,7 @@ const Hotel = () => {
     "description": "",
     "service": [],
     "numberRooms": 0,
-    "images": ""
+    "images": []
   }
   const [clickedRoom, setClickedRoom] = useState(INITIAL_CLICKED_ROOM)
   
@@ -82,10 +82,8 @@ const Hotel = () => {
           checkOut: "2023-06-28"
         }
       )
-      console.log(apiData.data)
       setData(apiData.data)
       console.log("data: ", data)
-      
     }
   fetchData();
 }, [])
@@ -260,7 +258,6 @@ const Hotel = () => {
                       }</td>
                       <td className="column-price">VND {room.price}</td>
                       <Room trigger={openPopup} setTrigger={setOpenPopup} data={clickedRoom}>
-                        {/* <h3>This is a room</h3> */}
                       </Room>
                     </tr>
                   )})}
