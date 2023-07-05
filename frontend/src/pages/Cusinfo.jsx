@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { useParams, useLocation } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { Card, Container, Form, Button, Row, Col } from "react-bootstrap"
 import { FaUser, FaMapMarkerAlt, FaPhone, FaStar } from "react-icons/fa";
 import { AiOutlineUser } from 'react-icons/ai';
@@ -15,6 +15,8 @@ import Cusnavbar from "../components/Cusnavbar"
 // `/account/${id}/info`
 const Cusinfo = () => {
     console.log("re-render")
+    const fc = useRef(null)
+    const navigate = useNavigate()
     const [accountInfo, setAccountInfo] = useState(null)
     const [activeTab, setActiveTab] = useState('info')
     const [editing, setEditing] = useState(false)
@@ -29,9 +31,8 @@ const Cusinfo = () => {
     const [phone, setPhone] = useState('')
 
     //token, id
-    const location = useLocation()
     const { id } = useParams()
-    const token = location.state.token
+    const token = localStorage.getItem("TOKEN")
     const config = {
         headers: {
             "Authorization": `Bearer ${token}`
@@ -52,10 +53,11 @@ const Cusinfo = () => {
         }
         console.log("payload :", payload)
         try {
-            const response = await axios.post(`http://localhost:8082/api/account/${id}/update`, payload, config)
+            const response = await axios.put(`http://localhost:8082/api/account/${id}/update`, payload, config)
 
             if (response.status === 200) {
                 console.log("cap nhat thanh cong")
+                window.location.reload()
             }
 
         } catch (error) {
@@ -117,8 +119,12 @@ const Cusinfo = () => {
                             {
                                 editing ? (
                                     <input style={{ width: '300px' }}
+                                        ref={fc}
                                         value={name}
-                                        onChange={(e) => setName(e.target.value)}
+                                        onChange={(e) => {
+                                            setName(e.target.value)
+                                            fc.current.focus()
+                                        }}
                                     />
 
                                 ) : (

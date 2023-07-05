@@ -1,5 +1,5 @@
 import "./hotel.css";
-import Navbar from "../../components/navbar/Navbar";
+import Navbar from "../../components/Navbar";
 import Header from "../../components/header/Header";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";

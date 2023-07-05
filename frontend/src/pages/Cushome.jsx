@@ -12,13 +12,10 @@ import { AuthContext } from '../context/AuthContext';
 
 
 const Cushome = () => {
-    const location = useLocation();
-    const context = useContext(AuthContext)
     const { id } = useParams();
     const [name, setName] = useState('')
     
-    const token = location.state.token
-    console.log("token: ", token)
+    const token = localStorage.getItem("TOKEN")
     const config = {
         headers: { 
             "Authorization" :  `Bearer ${token}`
@@ -41,7 +38,7 @@ const Cushome = () => {
   
     return (
         <div>
-              <Cusnavbar token={token} name={name} id={id} />
+              <Cusnavbar name={name} id={id} />
               <Header />
               <div className="mt-5 d-flex align-items-center gap-3 flex-column">
                 <Featured />

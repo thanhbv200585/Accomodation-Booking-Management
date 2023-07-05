@@ -7,7 +7,7 @@ import { FaBell, FaQuestionCircle } from 'react-icons/fa';
 
 
 
-const Cusnavbar = ({ token, name, id}) => {
+const Cusnavbar = ({ name, id}) => {
   const [isBellActive, setIsBellActive] = useState(false)
   const [shownotification, setShowNotification] = useState(false)
   const [hovered, setHovered] = useState(false);
@@ -34,7 +34,7 @@ const Cusnavbar = ({ token, name, id}) => {
   );
 
   const showDetail = () => {
-    navigate(`/account/${id}/info`, {state: {token:token}})
+    navigate(`/account/${id}/info`)
   }
 
   const popover = (

@@ -34,10 +34,9 @@ const Login = () => {
       const res = await axios.post(url, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       console.log("res of login in order to get id token: ", res)
-      navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`,  { 
-        state: { token: res.data.token } 
-      })
+      localStorage.setItem("TOKEN",res.data.token)
       localStorage.setItem("user", res.data)
+      navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`)
       console.log(localStorage.getItem("user"))
     } catch (err) {
       console.log("lỗi đăng nhập")
