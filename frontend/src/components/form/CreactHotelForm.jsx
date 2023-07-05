@@ -40,7 +40,6 @@ const CreateHotelForm = ({ visible, onHide }) => {
   };
 
   return (
-    <div>
       <Dialog
         visible={visible}
         style={{ width: '50vw' }}
@@ -118,7 +117,6 @@ const CreateHotelForm = ({ visible, onHide }) => {
         </Form.Group>
         
       </Dialog>
-    </div>
   );
 };
 

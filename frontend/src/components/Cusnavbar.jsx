@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Button, OverlayTrigger, Popover, Tooltip } from 'react-bootstrap';
@@ -7,13 +7,13 @@ import { FaBell, FaQuestionCircle } from 'react-icons/fa';
 
 
 
-const Cusnavbar = ({ name, id}) => {
+const Cusnavbar = () => {
   const [isBellActive, setIsBellActive] = useState(false)
   const [shownotification, setShowNotification] = useState(false)
   const [hovered, setHovered] = useState(false);
   const navigate = useNavigate()
-  //variable
-  //lấy tên của khách hàng để hiển thị lên navbar
+  const {id} = useParams()
+  const name = localStorage.getItem("CUS_NAME")
   const handleMouseEnter = () => {
     setHovered(true);
   };

@@ -28,6 +28,7 @@ const Cushome = () => {
             .then((response) => {
                 console.log("response: ",response)
                 setName(response.data.name)
+                localStorage.setItem("CUS_NAME",response.data.name)
             }).catch((error) => {
                 console.log(error)
             })
@@ -38,7 +39,7 @@ const Cushome = () => {
   
     return (
         <div>
-              <Cusnavbar name={name} id={id} />
+              <Cusnavbar/>
               <Header />
               <div className="mt-5 d-flex align-items-center gap-3 flex-column">
                 <Featured />
