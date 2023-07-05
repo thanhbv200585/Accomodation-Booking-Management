@@ -1,6 +1,4 @@
 import "./list.css";
-import Navbar from "../../components/Navbar";
-import Cusnavbar from "../../components/Cusnavbar";
 import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
@@ -10,6 +8,7 @@ import SearchItem from "../../components/searchItem/SearchItem";
 import axios from "axios";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
+import Navbar from "../../components/Navbar";
 
 const List = () => {
   const {user} = useContext(AuthContext)
@@ -42,13 +41,7 @@ const List = () => {
   console.log(user)
   return (
     <div>
-      {
-        user ? (
-          <Cusnavbar/>
-        ):(
-          <Navbar/>
-        )
-      }
+      <Navbar/>
       <Header type="list" />
       <div className="listContainer">
         <div className="listWrapper">

@@ -6,8 +6,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { FiLock } from 'react-icons/fi';
 
 import axios from "axios"
-
-import Cusnavbar from "../components/Cusnavbar"
+import Navbar from "../components/Navbar";
 
 
 
@@ -282,7 +281,7 @@ const Cusinfo = () => {
     }
     return (
         <div>
-            <Cusnavbar name={accountInfo.name} />
+            <Navbar/>
             <Container className="mt-5">
                 {/* sidebar */}
                 <div className="float-start mx-5">

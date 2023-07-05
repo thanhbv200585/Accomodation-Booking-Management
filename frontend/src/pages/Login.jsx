@@ -34,7 +34,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post(url, credentials);
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.role });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.role});
       console.log("res of login in order to get id token: ", res)
       localStorage.setItem("TOKEN",res.data.token)
       // localStorage.setItem("user", res.data.role)

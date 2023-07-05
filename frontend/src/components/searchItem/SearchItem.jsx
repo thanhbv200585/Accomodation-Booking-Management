@@ -10,8 +10,8 @@ const SearchItem = ({ item }) => {
   
   const { dates } = useContext(SearchContext)
 
-  console.log(dates)
-  console.log(item)
+  // console.log(dates)
+  // console.log(item)
   const assessment = (score) => {
     if (score < 2) return "Poor";
     else if (score >= 2 && score < 4) return "Fair";
