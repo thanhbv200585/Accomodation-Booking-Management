@@ -14,6 +14,9 @@ import "bootstrap/dist/css/bootstrap.css";
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
+
+  const { user } = useContext(AuthContext);
+
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -29,7 +32,6 @@ const Header = ({ type }) => {
   });
 
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -42,7 +44,6 @@ const Header = ({ type }) => {
 
   const { dispatch } = useContext(SearchContext);
 
-  console.log("user: ",user)
   const handleSearch = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", { state: { destination, dates, options } });

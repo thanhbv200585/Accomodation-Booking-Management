@@ -1,16 +1,18 @@
 import "./list.css";
 import Navbar from "../../components/Navbar";
+import Cusnavbar from "../../components/Cusnavbar";
 import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 import axios from "axios";
-import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const List = () => {
+  const {user} = useContext(AuthContext)
   const location = useLocation();
   const [data, setData] = useState([])
   const [destination, setDestination] = useState(location.state === null ? "" : location.state.destination);
@@ -37,10 +39,16 @@ const List = () => {
         console.log("error", error)
       })
   };
-
+  console.log(user)
   return (
     <div>
-      <Navbar />
+      {
+        user ? (
+          <Cusnavbar/>
+        ):(
+          <Navbar/>
+        )
+      }
       <Header type="list" />
       <div className="listContainer">
         <div className="listWrapper">

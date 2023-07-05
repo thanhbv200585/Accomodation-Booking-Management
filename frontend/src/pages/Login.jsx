@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 import NavLR from "../components/NavLR";
 import { Container } from "@mui/material";
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import FooterLR from "../components/FooterLR";
+import { AuthContext } from "../context/AuthContext";
 
 const dividerStyles = {
   flexGrow: 1,
@@ -15,6 +15,8 @@ const dividerStyles = {
   margin: '0 10px',
 };
 const Login = () => {
+
+  const {user} = useContext(AuthContext)
   const [credentials, setCredentials] = useState({
     username: undefined,
     password: undefined,
@@ -32,12 +34,12 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post(url, credentials);
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.role });
       console.log("res of login in order to get id token: ", res)
       localStorage.setItem("TOKEN",res.data.token)
-      localStorage.setItem("user", res.data)
+      // localStorage.setItem("user", res.data.role)
+      // console.log(localStorage.getItem("user"))
       navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`)
-      console.log(localStorage.getItem("user"))
     } catch (err) {
       console.log("lỗi đăng nhập")
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });

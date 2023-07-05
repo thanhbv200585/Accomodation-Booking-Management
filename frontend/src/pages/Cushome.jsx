@@ -6,15 +6,17 @@ import Header from "../components/header/Header";
 import MailList from "../components/mailList/MailList";
 import Cusnavbar from "../components/Cusnavbar";
 import PropertyList from "../components/propertyList/PropertyList";
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 
 
 const Cushome = () => {
     const { id } = useParams();
-    const [name, setName] = useState('')
     
+    const {user} = useContext(AuthContext)
+    console.log(user)
+    // console.log(localStorage.getItem("user"))
     const token = localStorage.getItem("TOKEN")
     const config = {
         headers: { 
@@ -26,8 +28,7 @@ const Cushome = () => {
         const fetchData = async () => {
             await axios.get(`http://localhost:8082/api/account/${id}/info`, config)
             .then((response) => {
-                console.log("response: ",response)
-                setName(response.data.name)
+                // console.log("response: ",response)
                 localStorage.setItem("CUS_NAME",response.data.name)
             }).catch((error) => {
                 console.log(error)
