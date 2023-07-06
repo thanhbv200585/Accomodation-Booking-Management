@@ -6,6 +6,7 @@ import { Container } from "@mui/material";
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import FooterLR from "../components/FooterLR";
 import { AuthContext } from "../context/AuthContext";
+import accountApi from "../api/accountApi";
 
 const dividerStyles = {
   flexGrow: 1,
@@ -16,7 +17,6 @@ const dividerStyles = {
 };
 const Login = () => {
 
-  const {user} = useContext(AuthContext)
   const [credentials, setCredentials] = useState({
     username: undefined,
     password: undefined,
@@ -37,8 +37,9 @@ const Login = () => {
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.role});
       console.log("res of login in order to get id token: ", res)
       localStorage.setItem("TOKEN",res.data.token)
-      // localStorage.setItem("user", res.data.role)
-      // console.log(localStorage.getItem("user"))
+      const resinfo = await accountApi.infor(res.data.accountId)
+      localStorage.setItem("user", resinfo.data.name)
+
       navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`)
     } catch (err) {
       console.log("lỗi đăng nhập")

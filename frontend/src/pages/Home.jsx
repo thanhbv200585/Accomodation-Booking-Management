@@ -7,8 +7,10 @@ import Navbar from "../components/Navbar";
 import PropertyList from "../components/propertyList/PropertyList";
 
 
+
 //trang chủ khi vào web
 const Home = () => {
+  localStorage.removeItem("user")
   return (
     <div>
       <Navbar />

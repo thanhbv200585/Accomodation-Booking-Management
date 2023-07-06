@@ -9,9 +9,14 @@ const ownerApi = {
         return axiosClient.post(url, data);
     },
 
-    listHotel: (id) =>{
-        const url = `${PREFIX}/${id}/allHotel?pageNumber=0&pageSize=2&sortBy=assess`
+    listHotel: (id, pageNumber, pageSize) =>{
+        const url = `${PREFIX}/${id}/allHotel?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=assess`
         return axiosClient.get(url)
+    },
+    //localhost:8082/api/owner/{idAccount}/{idHotel}/updateHotel
+    updateHotel: (id, hotelId, payload) =>{
+        const url = `${PREFIX}/${id}/${hotelId}/updateHotel`
+        return axiosClient.put(url, payload)
     },
     createRoom: (id, idHotel, data) =>{
         const url = `${PREFIX}/${id}/${idHotel}/new_room`

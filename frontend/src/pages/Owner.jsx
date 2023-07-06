@@ -1,72 +1,60 @@
 import { useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import CreateHotelForm from "../components/form/CreactHotelForm"
+import { Container} from 'react-bootstrap'
+import CreateHotelForm from "../components/dialog/CreactHotelForm"
 
-import { Dialog } from 'primereact/dialog'
-import { Button } from 'primereact/button'
+import "primereact/resources/themes/lara-light-indigo/theme.css"; // theme
+import "primereact/resources/primereact.css"; // core css
+import "primeicons/primeicons.css"; // icons
+
+import Listhotel from '../components/Listhotel'
+import Navbar from '../components/Navbar'
+
 const Owner = () => {
     const [hotelformvisible, setHotelformvisible] = useState(false)
+    const [listhotel, setListhotel] = useState(true)
+    // const [add, setAdd] =useState()
+
     const handlehotelformhile = () => {
         setHotelformvisible(false)
     }
-    const [visible, setVisible] = useState(false)
 
     return (
+        <>
+            <Navbar/>
+            <CreateHotelForm
+                visible={hotelformvisible} onHide={handlehotelformhile}
+            />
 
 
-
-        <Container>
-            {/* <CreateHotelForm 
-            visible={hotelformvisible} onHide={handlehotelformhile} 
-            /> */}
-
-            <div>
-                <Button
-                    label="Show"
-                    icon="pi pi-external-link"
-                    onClick={() => setVisible(true)}
-                />
-                <Dialog
-                    header="Header"
-                    visible={visible}
-                    style={{ width: "50vw" }}
-                    onHide={() => setVisible(false)}
-                >
-                    <p className="m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </Dialog>
-            </div>
-            <Row>
-                <Col md={3} style={{ height: "100vh" }}>
+            <Container className='d-flex'>
+                {/* //sidebar */}
+                <div className='position-fixed'
+                style={{ width: "20vw",  overflowY: "auto"}}>
                     <div className='p-3 m-2 mt-5'
                         style={{ cursor: "pointer" }}
                         onClick={() => setHotelformvisible(true)}
                     >
                         Create Hotel
                     </div>
-
                     <div className='p-3 m-2 mt-5'
-
+                        style={{ cursor: "pointer" }}
+                        onClick={()=>setListhotel(!listhotel)}
                     >
                         List Hotel
                     </div>
-
-                </Col>
-                <Col md={9} className='border border-start-5'
-                    style={{ height: "100vh" }}
-
+                </div>
+                {/* //main */}
+                <div className='mt-5'
+                    style={{ width: "60vw", overflowY: "auto", marginLeft:"20vw" }}
                 >
+                   {
+                    listhotel && <Listhotel/>
+                   }
+                </div>
 
-                </Col>
-            </Row>
-        </Container>
+            </Container>
+        </>
+
     )
 }
 

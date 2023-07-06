@@ -11,16 +11,16 @@ const accountApi = {
     // update information(name, address, phone)
     update: (id, payload) =>{
         const url = `${PREFIX}/${id}/update`
+        return axiosClient.put(url, payload)
+    },
+    changeUserName: (id, idHotel, payload) =>{
+        const url = `${PREFIX}/${id}/${idHotel}/changeUsername`
         return axiosClient.post(url, payload)
     },
-    changeUserName: (id, payload) =>{
-        const url = `${PREFIX}/${id}/${idHotel}/changeUsername`
-        return axiosClient.post(url, data)
-    },
-    changePassword: (id, payload) =>{
+    changePassword: (id, idHotel, payload) =>{
         const url = `${PREFIX}/${id}/${idHotel}/changePassword`
-        return axiosClient.post(url, data)
+        return axiosClient.post(url, payload)
     }
-};
+};  
 
 export default accountApi;

@@ -32,6 +32,7 @@ const CreateHotelForm = ({ visible, onHide }) => {
     try {
       const response = await ownerApi.newHotel(id, formData);
       console.log(response);
+      
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +61,6 @@ const CreateHotelForm = ({ visible, onHide }) => {
             name="nameHotel"
             value={formData.nameHotel}
             onChange={handleChange}
-            style={{ width: '300px' }}
           />
         </Form.Group>
         <Form.Group controlId="location">
@@ -70,7 +70,6 @@ const CreateHotelForm = ({ visible, onHide }) => {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            style={{ width: '300px' }}
           />
         </Form.Group>
         <Form.Group controlId="shortDescription">
@@ -81,7 +80,6 @@ const CreateHotelForm = ({ visible, onHide }) => {
             name="shortDescription"
             value={formData.shortDescription}
             onChange={handleChange}
-            style={{ width: '300px' }}
           />
         </Form.Group>
         <Form.Group controlId="detailDescription">
@@ -92,7 +90,6 @@ const CreateHotelForm = ({ visible, onHide }) => {
             name="detailDescription"
             value={formData.detailDescription}
             onChange={handleChange}
-            style={{ width: '300px' }}
           />
         </Form.Group>
         <Form.Group controlId="assess">
@@ -102,7 +99,6 @@ const CreateHotelForm = ({ visible, onHide }) => {
             name="assess"
             value={formData.assess}
             onChange={handleChange}
-            style={{ width: '300px' }}
           />
         </Form.Group>
         <Form.Group controlId="avatarHotel">
@@ -112,7 +108,6 @@ const CreateHotelForm = ({ visible, onHide }) => {
             name="avatarHotel"
             value={formData.avatarHotel}
             onChange={handleChange}
-            style={{ width: '300px' }}
           />
         </Form.Group>
         

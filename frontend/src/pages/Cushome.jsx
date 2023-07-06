@@ -6,37 +6,16 @@ import Header from "../components/header/Header";
 import MailList from "../components/mailList/MailList";
 import PropertyList from "../components/propertyList/PropertyList";
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
+import accountApi from '../api/accountApi';
 
 const Cushome = () => {
-    const { id } = useParams();
+    // const { id } = useParams();
     
     const {user} = useContext(AuthContext)
     console.log("user: ",user)
-    // console.log(localStorage.getItem("user"))
-    const token = localStorage.getItem("TOKEN")
-    const config = {
-        headers: { 
-            "Authorization" :  `Bearer ${token}`
-        }
-    };
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            await axios.get(`http://localhost:8082/api/account/${id}/info`, config)
-            .then((response) => {
-                // console.log("response: ",response)
-                localStorage.setItem("NAME",response.data.name)
-            }).catch((error) => {
-                console.log(error)
-            })
-
-        };
-        fetchData();
-    }, [id, token]);
-  
+   
     return (
         <div>
               <Navbar/>

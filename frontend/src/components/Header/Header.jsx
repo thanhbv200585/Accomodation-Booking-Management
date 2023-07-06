@@ -48,14 +48,14 @@ const Header = ({ type }) => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", { state: { destination, dates, options } });
   };
-  const [active, setActive] = useState('Stays')
-  const labels = [
-    { name: "Stays", icon: faBed },
-    { name: "Flights", icon: faPlane },
-    { name: "Car rentals", icon: faCar },
-    { name: "Attractions", icon: faBed },
-    { name: "Airport taxi", icon: faTaxi }
-  ]
+  // const [active, setActive] = useState('Stays')
+  // const labels = [
+  //   { name: "Stays", icon: faBed },
+  //   { name: "Flights", icon: faPlane },
+  //   { name: "Car rentals", icon: faCar },
+  //   { name: "Attractions", icon: faBed },
+  //   { name: "Airport taxi", icon: faTaxi }
+  // ]
 
   return (
     <div className="header">
@@ -64,7 +64,7 @@ const Header = ({ type }) => {
           type === "list" ? "headerContainer listMode" : "headerContainer"
         }
       >
-        <div className="headerList">
+        {/* <div className="headerList">
           {labels.map(label => (
             <div key={label.name}
               className={`${active == label.name ? 'active' : ''} headerListItem`}
@@ -73,7 +73,7 @@ const Header = ({ type }) => {
               <span>{label.name}</span>
             </div>
           ))}
-        </div>
+        </div> */}
         {type !== "list" && (
           <>
             <h1 className="headerTitle">

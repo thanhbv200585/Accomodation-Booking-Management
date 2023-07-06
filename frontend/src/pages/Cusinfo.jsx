@@ -1,21 +1,18 @@
 import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { Card, Container, Form, Button, Row, Col } from "react-bootstrap"
+import { Card, Container, Row, Col } from "react-bootstrap"
 import { FaUser, FaMapMarkerAlt, FaPhone, FaStar } from "react-icons/fa";
 import { AiOutlineUser } from 'react-icons/ai';
 import { FiLock } from 'react-icons/fi';
-
+import { Button } from 'primereact/button'
 import axios from "axios"
 import Navbar from "../components/Navbar";
-
-
-
+import accountApi from "../api/accountApi";
+import EditInfoForm from "../components/dialog/EditInfoForm";
 
 // `/account/${id}/info`
 const Cusinfo = () => {
     console.log("re-render")
-    const fc = useRef(null)
-    const navigate = useNavigate()
     const [accountInfo, setAccountInfo] = useState(null)
     const [activeTab, setActiveTab] = useState('info')
     const [editing, setEditing] = useState(false)
@@ -24,10 +21,6 @@ const Cusinfo = () => {
     const [submit, setSubmit] = useState(false)
     const [submit2, setSubmit2] = useState(false)
 
-    const [name, setName] = useState('')
-
-    const [address, setAddress] = useState('')
-    const [phone, setPhone] = useState('')
 
     //token, id
     const { id } = useParams()
@@ -37,130 +30,77 @@ const Cusinfo = () => {
             "Authorization": `Bearer ${token}`
         }
     };
-
     //function
     const handleTabClick = (tab) => {
         setActiveTab(tab)
     }
-
-
     const handleSubmit = async () => {
-        const payload = {
-            name,
-            address,
-            phone
-        }
-        console.log("payload :", payload)
         try {
-            const response = await axios.put(`http://localhost:8082/api/account/${id}/update`, payload, config)
-
+            const response = await accountApi.update(id, accountInfo)
+            console.log("1111")
             if (response.status === 200) {
                 console.log("cap nhat thanh cong")
-                window.location.reload()
+                // window.location.reload()
             }
 
         } catch (error) {
             console.log(error)
             console.log("khong update dc")
         }
-
-
-        setEditing(false);
     }
-
     const handleChangeusername = async () => {
-
-
-
         setPassblock(!passblock)
         setSubmit(!submit)
     }
-
     const handleChangePass = async () => {
 
         setUsernameblock(!usernameblock)
         setSubmit2(!submit2)
     }
-
+    const handleLogout =()=>{
+        localStorage.removeItem('TOKEN');
+        window.location.href = '/login';
+    }
     useEffect(() => {
         const fetchData = async () => {
             await axios.get(`http://localhost:8082/api/account/${id}/info`, config)
                 .then((response) => {
                     console.log("response: ", response)
                     setAccountInfo(response.data)
-                    setName(response.data.name)
-                    setAddress(response.data.address)
-                    setPhone(response.data.phone)
                     console.log("1")
                 }).catch((error) => {
                     console.log(error)
                 })
-
         };
         fetchData();
     }, [id, token]);
-
-
-
     if (!accountInfo) {
         return <div>Loading...</div>;
     }
     const Info = () => {
         return (
-            <>
-                <h1>Thông tin cá nhân</h1>
+            <div >
+                <EditInfoForm visible={editing} onHide={() => setEditing(false)} />
+                <h1>Personal information</h1>
                 <Card className="border-0">
                     <Card.Body>
                         <div className="info-item">
                             <div className="d-inline-block rounded-circle me-2 mt-3" style={{ background: "#a2a2a2" }}>
                                 <FaUser className="fs-5 m-1" />
                             </div>
-                            {
-                                editing ? (
-                                    <input style={{ width: '300px' }}
-                                        ref={fc}
-                                        value={name}
-                                        onChange={(e) => {
-                                            setName(e.target.value)
-                                            fc.current.focus()
-                                        }}
-                                    />
-
-                                ) : (
-                                    <span>{accountInfo.name}</span>
-                                )
-                            }
-
+                            <span>{accountInfo.name}</span>
                         </div>
                         <div className="info-item">
                             <div className="d-inline-block rounded-circle me-2 mt-3" style={{ background: "#a2a2a2" }}>
                                 <FaMapMarkerAlt className="fs-5 m-1" />
                             </div>
-                            {
-                                editing ? (
-                                    <input style={{ width: '300px' }}
-                                        value={address}
-                                        onChange={(e) => setAddress(e.target.value)}
-                                    />
-                                ) : (
-                                    <span>{accountInfo.address}</span>
-                                )
-                            }
+                            <span>{accountInfo.address}</span>
                         </div>
                         <div className="info-item">
                             <div className="d-inline-block rounded-circle me-2 mt-3" style={{ background: "#a2a2a2" }}>
                                 <FaPhone className="fs-5 m-1" />
                             </div>
-                            {
-                                editing ? (
-                                    <input style={{ width: '300px' }}
-                                        value={phone}
-                                        onChange={(e) => setPhone(e.target.value)}
-                                    />
-                                ) : (
-                                    <span>{accountInfo.phone}</span>
-                                )
-                            }
+                            <span>{accountInfo.phone}</span>
                         </div>
                         <div className="info-item">
                             <div className="d-inline-block rounded-circle me-2 mt-3" style={{ background: "#a2a2a2" }}>
@@ -171,30 +111,20 @@ const Cusinfo = () => {
                     </Card.Body>
                 </Card >
                 <div className="text-center mt-5">
-                    {editing ? (
-                        <Button className="mt-3"
-                            variant="success"
-                            style={{ width: "100%" }}
-                            type="submit"
-                            onClick={handleSubmit}
-                        >
-                            Submit
-                        </Button>
-                    ) : (
-                        <Button style={{ width: "100%" }} onClick={() => setEditing(true)}>
-                            Change information
-                        </Button>
-                    )}
-
+                    <Button
+                        icon='pi pi-user-edit'
+                        label="Change information"
+                        style={{ width: "100%" }} onClick={() => setEditing(true)}
+                    />
                 </div>
-            </>
+            </div>
 
         )
     }
     const Security = () => {
         return (
-            <>
-                <h1>An toàn bảo mật</h1>
+            <div>
+                <h1>Safe and secure</h1>
                 <div className="mt-5 text-center">
                     {
                         usernameblock ? (
@@ -276,43 +206,68 @@ const Cusinfo = () => {
 
                 </div >
 
-            </>
+            </div>
         )
     }
     return (
-        <div>
-            <Navbar/>
-            <Container className="mt-5">
+        <div style={{ background: "#F2F3F5" }}>
+            <Navbar />
+            <div className="d-flex"
+            style={{ height: "94vh"}}
+            >
                 {/* sidebar */}
-                <div className="float-start mx-5">
-                    <div
-                        className="p-3 m-2 border border-1"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => handleTabClick('info')}
-                    >
-                        <div className="d-inline-block rounded-circle me-2" style={{ background: "#a3d7fc" }}>
-                            <AiOutlineUser className="fs-3 m-2" />
+                <div className="d-flex align-items-center"
+                    
+                >
+                    <div>
+                        <div
+                            className="p-3"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleTabClick('info')}
+                        >
+                            <Button
+                                icon='pi pi-user'
+                                label="Personal information"
+                                className="p-button-text p-button-info "
+                                style={{ width: "20vw" }}
+                            />
                         </div>
-                        Thông tin cá nhân
-                    </div>
-                    <div
-                        className="p-3 m-2 border border-1"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => handleTabClick('security')}
-                    >
-                        <div className="d-inline-block rounded-circle me-2" style={{ background: "#a3d7fc" }}>
-                            <FiLock className="fs-3 m-2" />
+                        <div
+                            className="p-3"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleTabClick('security')}
+                        >
+                            <Button
+                                icon='pi pi-shield'
+                                label="Safe and secure" className="p-button-text p-button-info"
+                                style={{ width: "20vw" }}
+                            />
+
                         </div>
-                        An toàn và bảo mật
+                        <div
+                            className="p-3"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleTabClick('security')}
+                        >
+                            <Button
+                                icon='pi pi-sign-out'
+                                label="Log out" className="p-button-text p-button-info"
+                                style={{ width: "20vw" }}
+                                onClick={handleLogout}
+                            />
+                            
+                        </div>
                     </div>
                 </div>
 
                 {/* main */}
-                <div className="float-start mx-5">
+                <div className="px-5 pt-5"
+                style={{width:"80vw", background:"#FFFFFF"}}
+                >
                     {activeTab === 'info' && <Info />}
                     {activeTab === 'security' && <Security />}
                 </div>
-            </Container>
+            </div>
 
 
         </div>

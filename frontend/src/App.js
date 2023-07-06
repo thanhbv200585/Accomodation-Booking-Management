@@ -8,6 +8,7 @@ import Login from "./pages/Login"
 import Cushome from "./pages/Cushome"
 import Cusinfo from "./pages/Cusinfo"
 import Owner from "./pages/Owner"
+import HotelDetailForOwner from "./pages/HotelDetailForOwner";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         
         <Route path="/hotels" element={<List/>}/>
         <Route path="/hotels/:id" element={<Hotel/>}/>
+        <Route path="/owner/:id/hotel/:hotelId" element={<HotelDetailForOwner/>}/>
       </Routes>
     </Router>
   );

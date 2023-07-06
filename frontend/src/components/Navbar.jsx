@@ -6,13 +6,12 @@ import { FaBell, FaQuestionCircle } from 'react-icons/fa';
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
-
   const [isBellActive, setIsBellActive] = useState(false)
   const [shownotification, setShowNotification] = useState(false)
   const [hovered, setHovered] = useState(false);
   const navigate = useNavigate()
   const { id } = useParams()
-  const name = localStorage.getItem("NAME")
+  const name = localStorage.getItem("user")
   const handleMouseEnter = () => {
     setHovered(true);
   };
@@ -44,13 +43,14 @@ const Navbar = () => {
 
   console.log(user)
   return (
-    <div className="d-flex justify-content-center" style={{ height: "50px", background: "#003580" }}>
+    <div className="d-flex justify-content-center"
+    style={{ height: "6vh", background: "#0066FF" }}>
       <div className="d-flex align-items-center justify-content-between text-white" style={{ maxWidth: "1024px", width: "100%" }}>
         <div onClick={() => { navigate(-1) }} style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}>
           <span className="fw-bold">l am a booking</span>
         </div>
 
-          {user ? (
+          {user? (
             <>
               <div>
                 <OverlayTrigger
@@ -59,7 +59,7 @@ const Navbar = () => {
                   delay={{ show: 250, hide: 400 }}
                 >
                   <Link to="/help" className='mx-3'>
-                    <FaQuestionCircle className="border-0" style={{ fontSize: '24px' }} />
+                    <FaQuestionCircle className="border-0" style={{ fontSize: '24px',color:"#FFFF66"}} />
                   </Link>
                 </OverlayTrigger>
 
@@ -75,8 +75,8 @@ const Navbar = () => {
                 </OverlayTrigger>
               </div>
               <div
-                className="navItems p-2"
-                style={{ backgroundColor: hovered ? '#0071c2' : 'transparent', cursor: 'pointer', width: "200px" }}
+                className="navItems d-flex align-items-center justify-content-center"
+                style={{ backgroundColor: hovered ? '#0099FF' : 'transparent', cursor: 'pointer', width: "200px", height:"100%" }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={showDetail}>
@@ -85,10 +85,16 @@ const Navbar = () => {
             </>
           ) : (
             <div className="">
-              <Link to="http://localhost:3000/guest/register" className="navLink m-2 text-decoration-none">
+              <Link to="http://localhost:3000/guest/register"
+              className="navLink m-2 text-decoration-none"
+              style={{color:"white"}}
+              >
                 Register
               </Link>
-              <Link to="http://localhost:3000/login" className="navLink m-2 text-decoration-none">
+              <Link to="http://localhost:3000/login"
+              className="navLink m-2 text-decoration-none"
+              style={{color:"white"}}
+              >
                 Sign in
               </Link>
             </div>
