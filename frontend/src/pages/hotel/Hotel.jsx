@@ -227,17 +227,17 @@ const Hotel = () => {
             </div>
           </div>
 
-          <div className="roomTable">
-            <table className="table">
-              <thead className="thead">
-                <tr>
-                  <th className="column">Accomodation type</th>
-                  <th className="column">Price for {days} nights</th>
-                  <th className="column">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.rooms.map((room, index) => {
+            <div className="roomTable">
+              <table className="table">
+                <thead className="thead">
+                  <tr>
+                    <th className="column">Accomodation type</th>
+                    <th className="column">Price for {days} nights</th>
+                    <th className="column">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.rooms.map((room, index) => {
                   return (
                     <tr key={index}>
                       <td className="column"><button className="room-type" onClick={() => handleRoomClick(room)}>{room.roomType}</button></td>
