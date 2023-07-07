@@ -9,7 +9,9 @@ import {
   faCircleArrowRight,
   faCircleXmark,
   faLocationDot,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/free-solid-svg-icons"
+import { FaMapMarkerAlt, FaInfoCircle } from 'react-icons/fa'
+
 import { useContext, useState } from "react";
 import { useLocation, useNavigate, useParams} from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
@@ -19,7 +21,6 @@ import { useEffect } from "react";
 import Room from "../room/Room";
 
 const Hotel = () => {
-  const location = useLocation();
   const {hotelId} = useParams()
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
@@ -80,7 +81,7 @@ const Hotel = () => {
         }
       )
       setData(apiData.data)
-      console.log("data: ", data)
+      // console.log("data: ", data)
     }
   fetchData();
 }, [])
@@ -93,7 +94,7 @@ const Hotel = () => {
       }
     })
     setTotalPrice(total * days);
-    console.log(totalPrice)
+    // console.log(totalPrice)
   }, [selection])
   const {city, dates, options, dispatch } = useContext(SearchContext);
 
@@ -198,10 +199,23 @@ const Hotel = () => {
           <div className="hotelWrapper">
             <button className="bookNow" onClick={handleClick}>Reserve or Book Now!</button>
             <h1 className="hotelTitle">{data === undefined ? "" : data.nameHotel}</h1>
-            <div className="hotelAddress">
+            
+            {/* <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
               <span>{data === undefined ? "" : data.location}</span>
-            </div>
+            </div> */}
+
+            <div className='my-3'>
+                    <FaMapMarkerAlt
+                        className='me-2'
+                    />
+                    <span
+                        className="fs-6 fst-italic"
+                        style={{ color: "#0000FF" }}
+                    >
+                      {data === undefined ? "" : data.location}
+                    </span>
+                </div>
 
             <div className="hotelImages">
                 <div className="hotelImgWrapper">

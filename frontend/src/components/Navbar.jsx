@@ -103,8 +103,7 @@ const Navbar = () => {
 
 
       </div>
-    </div> :
-    <Cusnavbar/>
+    </div>
   );
 };
 

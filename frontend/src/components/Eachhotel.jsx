@@ -20,12 +20,20 @@ const Eachhotel = ({ item }) => {
     }
     return (
         <div className="searchItem">
-            <Link to={`/owner/${id}/hotel/${item.id}`} state={{ item: item }}>
+            <Link
+            to={`/owner/${id}/hotel/${item.id}`}
+            state={{ item: item }}
+            onClick={() => window.scrollTo(0, 0)}
+            >
                 <img src={item.avatarHotel} alt="" className="siImg" />
             </Link>
             <div className="siDesc">
                 <h1 className="siTitle">
-                    <Link to={`/owner/${id}/hotel/${item.id}`} state={{ item: item }} style={{ textDecoration: "none" }}>
+                    <Link 
+                    to={`/owner/${id}/hotel/${item.id}`}
+                    state={{ item: item }} style={{ textDecoration: "none" }}
+                    onClick={() => window.scrollTo(0, 0)}
+                    >
                         {item.nameHotel}
                     </Link>
                 </h1>
@@ -43,7 +51,11 @@ const Eachhotel = ({ item }) => {
                     </div>
                 }
                 <div className="siDetailTexts">
-                    <Link to={`/owner/${id}/hotel/${item.id}`} state={{ item: item }}>
+                    <Link
+                    to={`/owner/${id}/hotel/${item.id}`}
+                    state={{ item: item }}
+                    onClick={() => window.scrollTo(0, 0)}
+                    >
                         <button className="siCheckButton">Detail</button>
                     </Link>
                 </div>

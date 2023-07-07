@@ -25,7 +25,7 @@ function App() {
         <Route path="/owner/:id" element={<Owner/>}/>
         <Route path="/admin/:id" element={<Admin/>}/>
         <Route path="/hotels" element={<List/>}/>
-        <Route path="/hotels/:id" element={<Hotel/>}/>
+        <Route path="/hotels/:hotelId" element={<Hotel/>}/>
         <Route path="/owner/:id/hotel/:hotelId" element={<HotelDetailForOwner/>}/>
       </Routes>
     </Router>

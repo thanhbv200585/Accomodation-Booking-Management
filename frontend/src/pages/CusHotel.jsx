@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
-import SearchItem from "../components/searchItem/SearchItem";
 import axios from "axios";
 import { SearchContext } from "../context/SearchContext"; 
 import { AuthContext } from "../context/AuthContext";

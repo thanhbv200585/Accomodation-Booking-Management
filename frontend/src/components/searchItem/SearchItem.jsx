@@ -18,6 +18,7 @@ const SearchItem = ({ item }) => {
     else if (score >= 8 && score <= 9.5) return "Excellent";
     else if (score > 9.5 && score <= 10) return "Exceptional";
   }
+  console.log("1")
   return (
     <div className="searchItem">
       <img src={item.avatarHotel} alt="" className="siImg" />

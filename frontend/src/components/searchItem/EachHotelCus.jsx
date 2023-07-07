@@ -9,7 +9,7 @@ const assessScale = ['Poor', 'Fair', 'Good', "Very Good", 'Excellent'];
 const EachHotelCus = ({ item }) => {
 
     const { dates } = useContext(SearchContext)
-    const {id} = useParams()
+    const { id } = useParams()
     // console.log(dates)
     // console.log(item)
     const assessment = (score) => {
@@ -22,10 +22,22 @@ const EachHotelCus = ({ item }) => {
     }
     return (
         <div className="searchItem">
-            <img src={item.avatarHotel} alt="" className="siImg" />
+            <Link
+                to={`/customer/${id}/hotels/${item.id}`}
+                state={{ item: item }}
+                style={{ textDecoration: "none" }}
+                onClick={() => window.scrollTo(0, 0)}
+            >
+                <img src={item.avatarHotel} alt="" className="siImg" />
+            </Link>
             <div className="siDesc">
                 <h1 className="siTitle">
-                    <Link to={`/customer/${id}/hotels/${item.id}`} state={{ item: item }} style={{ textDecoration: "none" }}>
+                    <Link
+                        to={`/customer/${id}/hotels/${item.id}`}
+                        state={{ item: item }}
+                        style={{ textDecoration: "none" }}
+                        onClick={() => window.scrollTo(0, 0)}
+                    >
                         {item.nameHotel}
                     </Link>
                 </h1>
@@ -47,7 +59,11 @@ const EachHotelCus = ({ item }) => {
                     </div>
                 }
                 <div className="siDetailTexts">
-                    <Link to={`/customer/${id}/hotels/${item.id}`} state={{ item: item }}>
+                    <Link
+                        to={`/customer/${id}/hotels/${item.id}`}
+                        state={{ item: item }}
+                        onClick={() => window.scrollTo(0, 0)}
+                    >
                         <button className="siCheckButton">See availability</button>
                     </Link>
                 </div>
