@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import "./searchItem.css";
-import { useEffect } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import { useContext } from "react";
 
-const assessScale = ['Poor', 'Fair', 'Good', "Very Good", 'Excellent'];
 
 const SearchItem = ({ item }) => { 
   
@@ -17,7 +15,7 @@ const SearchItem = ({ item }) => {
     else if (score >= 2 && score < 4) return "Fair";
     else if (score >= 4 && score < 6) return "Good";
     else if (score >= 6 && score < 8) return "Very Good";
-    else if (score >= 8 && score <=9.5) return "Excellent";
+    else if (score >= 8 && score <= 9.5) return "Excellent";
     else if (score > 9.5 && score <= 10) return "Exceptional";
   }
   return (

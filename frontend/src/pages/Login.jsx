@@ -22,7 +22,7 @@ const Login = () => {
     password: undefined,
   });
   const url = "http://localhost:8082/api/guest/authenticate"
-  const { loading, error, dispatch } = useContext(AuthContext);
+  const { loading, error, dispatch, user } = useContext(AuthContext);
 
   const navigate = useNavigate()
 
