@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Card, Container, Row, Col } from "react-bootstrap"
 import { FaUser, FaMapMarkerAlt, FaPhone, FaStar } from "react-icons/fa";
-import { AiOutlineUser } from 'react-icons/ai';
-import { FiLock } from 'react-icons/fi';
 import { Button } from 'primereact/button'
 import axios from "axios"
 import Navbar from "../components/Navbar";
 import accountApi from "../api/accountApi";
 import EditInfoForm from "../components/dialog/EditInfoForm";
+import 'primeicons/primeicons.css'
+import EditToast from "../toast/EditToast";
 
 // `/account/${id}/info`
 const Cusinfo = () => {
@@ -20,7 +20,6 @@ const Cusinfo = () => {
     const [usernameblock, setUsernameblock] = useState(false)
     const [submit, setSubmit] = useState(false)
     const [submit2, setSubmit2] = useState(false)
-
 
     //token, id
     const { id } = useParams()
@@ -34,20 +33,9 @@ const Cusinfo = () => {
     const handleTabClick = (tab) => {
         setActiveTab(tab)
     }
-    const handleSubmit = async () => {
-        try {
-            const response = await accountApi.update(id, accountInfo)
-            console.log("1111")
-            if (response.status === 200) {
-                console.log("cap nhat thanh cong")
-                // window.location.reload()
-            }
+    
 
-        } catch (error) {
-            console.log(error)
-            console.log("khong update dc")
-        }
-    }
+
     const handleChangeusername = async () => {
         setPassblock(!passblock)
         setSubmit(!submit)
@@ -61,13 +49,13 @@ const Cusinfo = () => {
         localStorage.removeItem('TOKEN');
         window.location.href = '/login';
     }
+    
     useEffect(() => {
         const fetchData = async () => {
             await axios.get(`http://localhost:8082/api/account/${id}/info`, config)
                 .then((response) => {
                     console.log("response: ", response)
                     setAccountInfo(response.data)
-                    console.log("1")
                 }).catch((error) => {
                     console.log(error)
                 })
@@ -80,7 +68,11 @@ const Cusinfo = () => {
     const Info = () => {
         return (
             <div >
-                <EditInfoForm visible={editing} onHide={() => setEditing(false)} />
+                <EditToast/>
+
+                <EditInfoForm
+                visible={editing}
+                onHide={() => setEditing(false)} />
                 <h1>Personal information</h1>
                 <Card className="border-0">
                     <Card.Body>
@@ -114,7 +106,7 @@ const Cusinfo = () => {
                     <Button
                         icon='pi pi-user-edit'
                         label="Change information"
-                        style={{ width: "100%" }} onClick={() => setEditing(true)}
+                        style={{ width: "100%"}} onClick={() => setEditing(true)}
                     />
                 </div>
             </div>

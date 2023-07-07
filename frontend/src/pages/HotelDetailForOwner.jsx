@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import guestApi from "../api/guestApi"
 import MailList from "../components/mailList/MailList"
@@ -9,6 +9,7 @@ import { FaMapMarkerAlt, FaInfoCircle } from 'react-icons/fa'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { Button } from 'primereact/button';
 import EditHotelForm from "../components/dialog/edithotelform"
+import NewRoomForm from "../components/dialog/NewRoomForm"
 
 import "primereact/resources/themes/lara-light-indigo/theme.css"; // theme
 import "primereact/resources/primereact.css"; // core css
@@ -20,6 +21,7 @@ const HotelDetailForOwner = () => {
     const { id, hotelId } = useParams()
     const [datahotel, setDatahotel] = useState({})
     const [edithotelform, setEdithotelform] = useState(false)
+    const [visibleNewRoom, setVisibleNewRoom] = useState(false)
 
     useEffect(() => {
         const getDataHotel = async () => {
@@ -47,6 +49,10 @@ const HotelDetailForOwner = () => {
     }
     return (
         <>
+            <NewRoomForm
+                visible={visibleNewRoom}
+                onHide={() => setVisibleNewRoom(false)}
+            />
             <EditHotelForm
                 visible={edithotelform} onHide={handledithotelform}
             />
@@ -80,7 +86,9 @@ const HotelDetailForOwner = () => {
                         <Button
                             className="m-3"
                             style={{ width: "250px" }}
-                            icon="pi pi-plus" label="New room" />
+                            icon="pi pi-plus" label="New room"
+                            onClick={() => setVisibleNewRoom(true)}
+                        />
                     </Col>
                 </Row>
                 <div className="fw-bold my-2">

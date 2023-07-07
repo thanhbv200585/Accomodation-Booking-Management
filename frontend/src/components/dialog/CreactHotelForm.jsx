@@ -28,7 +28,7 @@ const CreateHotelForm = ({ visible, onHide }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const response = await ownerApi.newHotel(id, formData);
       console.log(response);
