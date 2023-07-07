@@ -24,7 +24,12 @@ const List = () => {
   const url = "http://localhost:8082/api/guest/hotels"
 
   useEffect(() => {
-    axios.get(url).then(response => setData(response.data))
+    console.log(destination)
+    axios.get(url, 
+      {
+        params: {"location": destination}
+      }).then(response => {setData(response.data) 
+        console.log(response)})
       .catch((err) => console.error(err))
   }, [])
   

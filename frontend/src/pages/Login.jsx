@@ -22,7 +22,7 @@ const Login = () => {
     password: undefined,
   });
   const url = "http://localhost:8082/api/guest/authenticate"
-  const { loading, error, dispatch } = useContext(AuthContext);
+  const { loading, error, dispatch, user } = useContext(AuthContext);
 
   const navigate = useNavigate()
 
@@ -39,6 +39,7 @@ const Login = () => {
       localStorage.setItem("TOKEN",res.data.token)
       const resinfo = await accountApi.infor(res.data.accountId)
       localStorage.setItem("user", resinfo.data.name)
+      localStorage.setItem("accountId", res.data.accountId)
 
       navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`)
     } catch (err) {

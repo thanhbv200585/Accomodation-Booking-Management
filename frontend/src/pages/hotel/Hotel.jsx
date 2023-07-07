@@ -14,18 +14,15 @@ import { useContext, useState } from "react";
 import { useLocation, useNavigate} from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
-import Reserve from "../../components/reserve/Reserve";
 import axios from "axios";
 import { useEffect } from "react";
 import Room from "../room/Room";
 
 const Hotel = () => {
   const location = useLocation();
-  const id = location.pathname.split("/")[2];
+  const hotelId = location.pathname.split("/")[2];
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const [booking, setBooking] = useState(false);
   const [selection, setSelection] = useState({});
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -76,7 +73,7 @@ const Hotel = () => {
 
   useEffect(()=>{
     const fetchData = async () => {
-      const url = `http://localhost:8082/api/guest/hotels/${id}/details`
+      const url = `http://localhost:8082/api/guest/hotels/${hotelId}/details`
       var apiData = await axios.post(url, {
           checkIn: "2023-06-27",
           checkOut: "2023-06-28"
@@ -96,21 +93,10 @@ const Hotel = () => {
       }
     })
     setTotalPrice(total * days);
-    console.log(totalPrice)
+    // console.log(totalPrice)
+    // console.log("selection", selection)
   }, [selection])
   const {city, dates, options, dispatch } = useContext(SearchContext);
-
-  const listDownRoom = (room) => {
-    let list = [];
-    console.log(room)
-    for(let i = 0; i < 1; i++) {
-      list.push(
-        <option value={i}>{i}  (VND {room.price * i})</option>
-      )
-    }
-
-    return list;
-  }
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -144,10 +130,25 @@ const Hotel = () => {
     setSlideNumber(newSlideNumber);
   };
 
+  const isObjectEmpty = (objectName) => {
+    return (
+      objectName &&
+      Object.keys(objectName).length === 0 &&
+      objectName.constructor === Object
+    );
+  };
+
   const handleClick = () => {
     if (user) {
-      setOpenModal(true);
-      dispatch({ type: "NEW_SEARCH", payload: { city, dates, options } })
+      console.log("selection: ", selection)
+      if (isObjectEmpty(selection)) {
+        alert("Please select your room");
+      } else {
+        console.log(user)
+        const id = localStorage.getItem("accountId")
+        navigate(`/customer/booking/${id}`, {state: {"booking": selection, "price": totalPrice, "id": hotelId}})
+        dispatch({ type: "NEW_SEARCH", payload: { city, dates, options } })
+      }
     } else {
       navigate("/login");
     }
@@ -231,7 +232,7 @@ const Hotel = () => {
 
             <div className="roomTable">
               <table className="table">
-                <thead>
+                <thead className="thead">
                   <tr>
                     <th className="column">Accomodation type</th>
                     <th className="column">Price for {days} nights</th>
@@ -270,7 +271,6 @@ const Hotel = () => {
           <Footer />
         </div>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
     </div>
   );
 };

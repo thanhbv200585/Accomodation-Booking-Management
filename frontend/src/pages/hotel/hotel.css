@@ -170,7 +170,7 @@
 }
 
 
-thead > tr > th {
+.thead {
   position: sticky;
   top: 0;
   background-color: #2f2f2f;

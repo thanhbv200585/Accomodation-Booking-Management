@@ -8,8 +8,8 @@ import Login from "./pages/Login"
 import Cushome from "./pages/Cushome"
 import Cusinfo from "./pages/Cusinfo"
 import Owner from "./pages/Owner"
-import HotelDetailForOwner from "./pages/HotelDetailForOwner";
-
+import HotelDetailForOwner from "./pages/HotelDetailForOwner"
+import BookingPage from "./pages/booking/BookingPage";
 function App() {
   return (
     <Router>
@@ -24,6 +24,7 @@ function App() {
         <Route path="/hotels" element={<List/>}/>
         <Route path="/hotels/:id" element={<Hotel/>}/>
         <Route path="/owner/:id/hotel/:hotelId" element={<HotelDetailForOwner/>}/>
+        <Route path="/customer/booking/:id" element={<BookingPage/>}/>
       </Routes>
     </Router>
   );
