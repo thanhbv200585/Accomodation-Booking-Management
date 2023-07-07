@@ -7,9 +7,8 @@ import Login from "./pages/Login"
 // import Hotel from "./pages/Hotel"
 import Cushome from "./pages/Cushome"
 import Cusinfo from "./pages/Cusinfo"
-import Owner from "./pages/Owner"
-import HotelDetailForOwner from "./pages/HotelDetailForOwner";
-
+import Edit from "./pages/Edit"
+import BookingPage from './pages/booking/BookingPage'
 function App() {
   return (
     <Router>
