@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import "bootstrap/dist/css/bootstrap.css";
@@ -14,9 +14,7 @@ import "bootstrap/dist/css/bootstrap.css";
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
-
-  const { user } = useContext(AuthContext);
-
+  const {id} = useParams()
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -30,7 +28,7 @@ const Header = ({ type }) => {
     children: 0,
     room: 1,
   });
-
+  const user = localStorage.getItem("user")
   const navigate = useNavigate();
 
   const handleOption = (name, operation) => {
@@ -45,8 +43,13 @@ const Header = ({ type }) => {
   const { dispatch } = useContext(SearchContext);
 
   const handleSearch = () => {
-    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } })
+    if(user){
+      navigate(`/customer/${id}/hotels`, { state: { destination, dates, options } });
+    }
+    else{
     navigate("/hotels", { state: { destination, dates, options } });
+    }
   };
   // const [active, setActive] = useState('Stays')
   // const labels = [

@@ -1,15 +1,17 @@
 import { Link, useParams } from "react-router-dom";
-import "./searchItem/searchItem.css";
+import "./searchItem.css";
 import { useEffect } from "react";
-import { SearchContext } from "../context/SearchContext";
+import { SearchContext } from "../../context/SearchContext";
 import { useContext } from "react";
 
 const assessScale = ['Poor', 'Fair', 'Good', "Very Good", 'Excellent'];
 
-const Eachhotel = ({ item }) => {
-    // console.log(item)
+const EachHotelCus = ({ item }) => {
+
     const { dates } = useContext(SearchContext)
-    const { id } = useParams()
+    const {id} = useParams()
+    // console.log(dates)
+    // console.log(item)
     const assessment = (score) => {
         if (score < 2) return "Poor";
         else if (score >= 2 && score < 4) return "Fair";
@@ -20,18 +22,20 @@ const Eachhotel = ({ item }) => {
     }
     return (
         <div className="searchItem">
-            <Link to={`/owner/${id}/hotel/${item.id}`} state={{ item: item }}>
-                <img src={item.avatarHotel} alt="" className="siImg" />
-            </Link>
+            <img src={item.avatarHotel} alt="" className="siImg" />
             <div className="siDesc">
                 <h1 className="siTitle">
-                    <Link to={`/owner/${id}/hotel/${item.id}`} state={{ item: item }} style={{ textDecoration: "none" }}>
+                    <Link to={`/customer/${id}/hotels/${item.id}`} state={{ item: item }} style={{ textDecoration: "none" }}>
                         {item.nameHotel}
                     </Link>
                 </h1>
-                <span className="siDistance"><b>{item.location}</b></span>
+                <span className="siDistance">{item.location}</span>
+                <span className="siTaxiOp">Free airport taxi</span>
                 <span className="siFeatures">{item.shortDescription}</span>
-
+                <span className="siCancelOp">Free cancellation </span>
+                <span className="siCancelOpSubtitle">
+                    You can cancel later, so lock in this great price today!
+                </span>
             </div>
             <div className="siDetails">
                 {item.number_rating === undefined ? <div className="siRating">
@@ -43,8 +47,8 @@ const Eachhotel = ({ item }) => {
                     </div>
                 }
                 <div className="siDetailTexts">
-                    <Link to={`/owner/${id}/hotel/${item.id}`} state={{ item: item }}>
-                        <button className="siCheckButton">Detail</button>
+                    <Link to={`/customer/${id}/hotels/${item.id}`} state={{ item: item }}>
+                        <button className="siCheckButton">See availability</button>
                     </Link>
                 </div>
             </div>
@@ -52,4 +56,4 @@ const Eachhotel = ({ item }) => {
     );
 };
 
-export default Eachhotel;
+export default EachHotelCus;

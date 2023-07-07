@@ -13,7 +13,8 @@ const NewRoomForm = ({ visible, onHide }) => {
         price: 200,
         description: '',
         service: [],
-        numberRooms: 3
+        numberRooms: 3,
+        images:[]
       });
 
 
@@ -42,7 +43,16 @@ const NewRoomForm = ({ visible, onHide }) => {
         });
       };
 
-    
+      const handleImageChange = (e) => {
+        const { value } = e.target;
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          images: [value]
+        }));
+      };
+      
+      
+
     const handleSubmit = async (e) => {
         console.log(formData);
         try{
@@ -59,7 +69,7 @@ const NewRoomForm = ({ visible, onHide }) => {
     return (
         <Dialog
             visible={visible}
-            style={{ width: "60vw" }}
+            style={{ width: "60vw", maxWidth:"650px" }}
             onHide={onHide}
             header="Create Rooms"
             footer={
@@ -135,6 +145,15 @@ const NewRoomForm = ({ visible, onHide }) => {
                         name="numberRooms"
                         value={formData.numberRooms}
                         onChange={handleInputChange}
+                    />
+                </Form.Group>
+                <Form.Group controlId="images">
+                    <Form.Label>Image</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="images"
+                        value={formData.images}
+                        onChange={handleImageChange}
                     />
                 </Form.Group>
             </Form>

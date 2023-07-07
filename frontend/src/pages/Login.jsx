@@ -37,9 +37,12 @@ const Login = () => {
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.role});
       console.log("res of login in order to get id token: ", res)
       localStorage.setItem("TOKEN",res.data.token)
+      // console.log(res.data.role.toLowerCase())`
       const resinfo = await accountApi.infor(res.data.accountId)
-      localStorage.setItem("user", resinfo.data.name)
+      // const resinfo = await accountApi.infor(22)
 
+      console.log(resinfo)
+      localStorage.setItem("user", resinfo.data.name)
       navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`)
     } catch (err) {
       console.log("lỗi đăng nhập")

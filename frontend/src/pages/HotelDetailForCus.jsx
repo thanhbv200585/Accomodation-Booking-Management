@@ -8,29 +8,22 @@ import { Container, Image, Row, Col } from "react-bootstrap"
 import { FaMapMarkerAlt, FaInfoCircle } from 'react-icons/fa'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { Button } from 'primereact/button';
-import EditHotelForm from "../components/dialog/edithotelform"
-import NewRoomForm from "../components/dialog/NewRoomForm"
-import AllBooking from "../components/dialog/allBooking"
 import "primereact/resources/themes/lara-light-indigo/theme.css"; // theme
 import "primereact/resources/primereact.css"; // core css
 import "primeicons/primeicons.css"; // icons
 
 
-
-const HotelDetailForOwner = () => {
+const HotelDetailForCus = () => {
     const { id, hotelId } = useParams()
     const [datahotel, setDatahotel] = useState({})
-    const [edithotelform, setEdithotelform] = useState(false)
-    const [visibleNewRoom, setVisibleNewRoom] = useState(false)
-    const [visibleBooking, setVisibleBooking] = useState(false)
 
     useEffect(() => {
         const getDataHotel = async () => {
             try {
                 const res = await guestApi.viewHotelDetail(hotelId)
-                // console.log(hotelId)
+                console.log(hotelId)
                 setDatahotel(res.data)
-                // console.log(datahotel)
+                console.log(datahotel)
             }
             catch (err) {
                 console.log(err)
@@ -45,22 +38,9 @@ const HotelDetailForOwner = () => {
                 Loading...
             </div>
         )
-    const handledithotelform = () => {
-        setEdithotelform(false)
-    }
     return (
         <>
-            <AllBooking
-            visible={visibleBooking}
-            onHide={() => setVisibleBooking(false)}
-            />
-            <NewRoomForm
-                visible={visibleNewRoom}
-                onHide={() => setVisibleNewRoom(false)}
-            />
-            <EditHotelForm
-                visible={edithotelform} onHide={handledithotelform}
-            />
+           
             <Navbar />
             <Container>
                 <div>
@@ -81,28 +61,14 @@ const HotelDetailForOwner = () => {
                             style={{ width: "30vw", height: "30vw" }}
                         />
                     </Col>
-                    <Col
-                    className="d-block" 
-                    sm={{ span: 6, offset: 3 }}>
-                        <Button icon="pi pi-file-edit"
+                    <Col sm={{ span: 6, offset: 3 }}>
+                        {/* <Button icon="pi pi-file-edit"
                             style={{ width: "250px" }}
-                            label="Edit hotel information"
+                            label="View availability room"
                             className="m-3 d-block"
-                            onClick={() => setEdithotelform(true)}
-                        />
-                        <Button
-                            className="m-3 d-block"
-                            style={{ width: "250px" }}
-                            icon="pi pi-plus" label="New room"
-                            onClick={() => setVisibleNewRoom(true)}
-                        />
-                        <Button
-                            className="m-3 d-block"
-                            style={{ width: "250px" }}
-                            icon="pi pi-eye"
-                            label="Booking managament"
-                            onClick={() => setVisibleBooking(true)}
-                        />
+                            onClick={() => setVisibleRoom(true)}
+                        /> */}
+                        
                     </Col>
                 </Row>
                 <div className="fw-bold my-2">
@@ -111,11 +77,11 @@ const HotelDetailForOwner = () => {
                 <div className="fw-light my-2">
                     {datahotel.detailDescription}
                 </div>
-
             </Container>
+            
             <MailList />
             <Footer />
         </>
     )
 }
-export default HotelDetailForOwner
+export default HotelDetailForCus

@@ -8,7 +8,6 @@ import Navbar from "../components/Navbar";
 import accountApi from "../api/accountApi";
 import EditInfoForm from "../components/dialog/EditInfoForm";
 import 'primeicons/primeicons.css'
-import EditToast from "../toast/EditToast";
 
 // `/account/${id}/info`
 const Cusinfo = () => {
@@ -68,7 +67,6 @@ const Cusinfo = () => {
     const Info = () => {
         return (
             <div >
-                <EditToast/>
 
                 <EditInfoForm
                 visible={editing}

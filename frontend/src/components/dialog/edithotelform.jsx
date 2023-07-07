@@ -22,7 +22,7 @@ const EditHotelForm = ({ visible, onHide }) => {
     const { id, hotelId } = useParams();
     // console.log(id, hotelId)
     const token = localStorage.getItem("TOKEN")
-    console.log(token)
+    // console.log(token)
     useEffect(() => {
         const getDataHotel = async () => {
             try {
@@ -48,7 +48,6 @@ const EditHotelForm = ({ visible, onHide }) => {
         
         try {
             const response = await ownerApi.updateHotel(id, hotelId, formData);
-            // const response = await axios.put(`http://localhost:8082/api/owner/${id}/${hotelId}/updateHotel`, formData, config)
             console.log(response);
 
         } catch (error) {

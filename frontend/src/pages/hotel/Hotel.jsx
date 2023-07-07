@@ -11,7 +11,7 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useState } from "react";
-import { useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate, useParams} from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
@@ -21,7 +21,7 @@ import Room from "../room/Room";
 
 const Hotel = () => {
   const location = useLocation();
-  const id = location.pathname.split("/")[2];
+  const {hotelId} = useParams()
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -44,13 +44,13 @@ const Hotel = () => {
   const [data,setData] = useState(
     {
       "id": null,
-      "nameHotel": "Beryl Palace Hotel and Spa",
-      "location": "173 Hang Bong Street, Hoan Kiem District, Ha Noi, Vietnam",
+      "nameHotel": "",
+      "location": "",
       "score": 0.0,
-      "shortDescription": "Lối trang trí kiểu cổ điển của Pháp và kiến trúc Châu Âu là nét đặc trưng của Beryl Palace Hotel and Spa, một chỗ nghỉ boutique nằm trên Phố Cổ Hàng Bông nhộn nhịp. Chỉ nằm cách Nhà Hát Lớn Hà Nội nổi tiếng 15 phút đi bộ, chỗ nghỉ này cung cấp các liệu pháp mát-xa thư giãn và WiFi miễn phí.",
-      "detailDescription": "Lối trang trí kiểu cổ điển của Pháp và kiến trúc Châu Âu là nét đặc trưng của Beryl Palace Hotel and Spa, một chỗ nghỉ boutique nằm trên Phố Cổ Hàng Bông nhộn nhịp. Chỉ nằm cách Nhà Hát Lớn Hà Nội nổi tiếng 15 phút đi bộ, chỗ nghỉ này cung cấp các liệu pháp mát-xa thư giãn và WiFi miễn phí. Phòng nghỉ lắp máy điều hòa trang nhã tại đây được trang bị TV màn hình phẳng 32 inch, minibar và két an toàn cá nhân. Một số phòng có tầm nhìn ra quang cảnh thành phố qua cửa sổ vách kính lớn. Các phòng tắm riêng đi kèm vòi sen, bồn tắm hoặc bồn tắm spa. Beryl Palace Hotel and Spa nằm cách Hồ Hoàn Kiếm, Đền Ngọc Sơn và Chợ Đồng Xuân 10 phút đi bộ ngắn. Ga Hà Nội nằm trong bán kính 10 phút lái xe từ chỗ nghỉ này. Sân bay quốc tế Nội Bài cách đó 45 phút lái xe. Bàn đặt tour có thể giúp khách thu xếp dịch vụ cho thuê xe đạp, các chuyến đi trong ngày và dịch vụ đưa đón sân bay. Khách sạn cũng có trung tâm dịch vụ doanh nhân, dịch vụ giặt là và lễ tân 24 giờ. Nhà hàng Beryl phục vụ bữa sáng tự chọn hàng ngày cũng như các món ăn à la carte kiểu phương Tây và Châu Á. Quý khách có thể thưởng thức đồ uống tại quầy bar.",
+      "shortDescription": "",
+      "detailDescription": "",
       "assess": 4,
-      "avatarHotel": "https://cf.bstatic.com/xdata/images/hotel/square200/285771256.webp?k=1dfdd62d49240537ee3f4927c699939172383646190a027a528fdd7c71f1d9fc&o=",
+      "avatarHotel": "",
       "numberRating": 0,
       "rooms": [
           {
@@ -76,7 +76,7 @@ const Hotel = () => {
 
   useEffect(()=>{
     const fetchData = async () => {
-      const url = `http://localhost:8082/api/guest/hotels/${id}/details`
+      const url = `http://localhost:8082/api/guest/hotels/${hotelId}/details`
       var apiData = await axios.post(url, {
           checkIn: "2023-06-27",
           checkOut: "2023-06-28"
@@ -159,6 +159,12 @@ const Hotel = () => {
     setOpenPopup(true);
     setClickedRoom(room);
   }
+  if(!data)
+  return(
+    <div>
+      Loading...
+    </div>
+  )
   return (
     <div>
       <Navbar />
@@ -273,7 +279,7 @@ const Hotel = () => {
           <Footer />
         </div>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={hotelId}/>}
     </div>
   );
 };

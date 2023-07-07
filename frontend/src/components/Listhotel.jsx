@@ -12,9 +12,7 @@ const Listhotel = ()=>{
         const fetchData = async () => {
             try {
               const response = await ownerApi.listHotel(id,0,100)
-            //   const data = response.data
             setHotels(response.data)
-            //   console.log(data)
             } catch (error) {
               console.error('Error:', error);
             }
@@ -22,13 +20,14 @@ const Listhotel = ()=>{
          fetchData()
       
     },[])
-    if(!hotels)
-    return(
-        <div>
-            Loading....
-        </div>
-    )
-
+    if(!hotels){
+        console.log("loading")
+        return(
+            <div>
+                Loading....
+            </div>
+        )
+    }
     return(
         <>
             {hotels.map((hotel, index)=>(

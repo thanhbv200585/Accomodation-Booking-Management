@@ -7,7 +7,7 @@ import { Button } from 'primereact/button';
 import accountApi from '../../api/accountApi';
 
 
-const EditInfoForm = ({ visible, onHide, showSuccess }) => {
+const EditInfoForm = ({ visible, onHide }) => {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -43,7 +43,6 @@ const EditInfoForm = ({ visible, onHide, showSuccess }) => {
 
         try {
             const response = await accountApi.update(id, formData)
-            showSuccess()
 
         } catch (error) {
             console.log(error);

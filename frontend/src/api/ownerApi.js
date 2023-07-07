@@ -21,6 +21,10 @@ const ownerApi = {
     createRoom: (id, idHotel, data) =>{
         const url = `${PREFIX}/${id}/${idHotel}/new_room`
         return axiosClient.post(url, data)
+    },
+    getAllBooking: (id, idHotel) =>{
+        const url = `${PREFIX}/${id}/${idHotel}/getAllBooking`
+        return axiosClient.get(url)
     }
 };
 

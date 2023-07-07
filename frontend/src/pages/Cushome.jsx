@@ -5,10 +5,8 @@ import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 import MailList from "../components/mailList/MailList";
 import PropertyList from "../components/propertyList/PropertyList";
-import { useParams } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
-import accountApi from '../api/accountApi';
 
 const Cushome = () => {
     // const { id } = useParams();
