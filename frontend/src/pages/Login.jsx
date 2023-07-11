@@ -3,7 +3,8 @@ import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import NavLR from "../components/NavLR";
 import { Container } from "@mui/material";
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import {Form, Row, Col } from 'react-bootstrap';
+import { Button } from "primereact/button";
 import FooterLR from "../components/FooterLR";
 import { AuthContext } from "../context/AuthContext";
 import accountApi from "../api/accountApi";
@@ -37,12 +38,11 @@ const Login = () => {
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.role});
       console.log("res of login in order to get id token: ", res)
       localStorage.setItem("TOKEN",res.data.token)
-      // console.log(res.data.role.toLowerCase())`
       const resinfo = await accountApi.infor(res.data.accountId)
-      // const resinfo = await accountApi.infor(22)
 
-      console.log(resinfo)
-      localStorage.setItem("user", resinfo.data.name)
+      // console.log(resinfo)
+      localStorage.setItem('user',1)
+      localStorage.setItem("username", resinfo.data.name)
       navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`)
     } catch (err) {
       console.log("lỗi đăng nhập")
@@ -80,9 +80,9 @@ const Login = () => {
 
               <Button disabled={loading} variant="primary"
                 onClick={handleClick}
-                className='col-12'>
-                Login
-              </Button>
+                className='col-12'
+                label="Login"
+                />
             </Form>
             <div className="m-4 text-center" style={{ color: "red" }}>
               {error && <span>{error.message}</span>}

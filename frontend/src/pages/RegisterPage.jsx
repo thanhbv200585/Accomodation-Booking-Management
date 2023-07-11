@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Button, Modal, Container, Row, Col } from 'react-bootstrap';
+import { Form, Modal, Container, Row, Col } from 'react-bootstrap';
+import { Button } from 'primereact/button';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import axios from 'axios';
-import "bootstrap/dist/css/bootstrap.css";
 import NavLR from '../components/NavLR';
 import { useNavigate } from 'react-router-dom';
 import FooterLR from '../components/FooterLR';
@@ -137,7 +137,7 @@ const RegisterPage = () => {
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                autocomplete = "on"
+                autoComplete = "on"
               />
 
             </Col>
@@ -222,9 +222,10 @@ const RegisterPage = () => {
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm={{ span: 6, offset: 3 }}>
-              <Button variant="primary" type="submit" className='col-12'>
-                Sign up
-              </Button>
+              <Button
+              type="submit" className='col-12'
+              label='Sign up'
+              />
             </Col>
           </Form.Group>
 

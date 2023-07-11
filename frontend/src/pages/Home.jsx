@@ -20,7 +20,7 @@ const Home = () => {
         <h1 className="fs-4" style={{width: "1024px"}}>Browse by property type</h1>
         <PropertyList/>
         <h1 className="fs-4" style={{width: "1024px"}}>Homes guests love</h1>
-        <FeaturedProperties/>
+        {/* <FeaturedProperties/> */}
         <MailList/>
         <Footer/>
       </div>

@@ -46,6 +46,7 @@ const Cusinfo = () => {
     }
     const handleLogout =()=>{
         localStorage.removeItem('TOKEN');
+        localStorage.removeItem('user')
         window.location.href = '/login';
     }
     

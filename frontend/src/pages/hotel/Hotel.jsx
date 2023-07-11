@@ -50,24 +50,7 @@ const Hotel = () => {
       "assess": 4,
       "avatarHotel": "",
       "numberRating": 0,
-      "rooms": [
-          {
-              "roomType": "Queen Studio",
-              "price": 1800000,
-              "description": "This studio has a balcony, dining area and kitchenware",
-              "service": [
-                  "Private kitchen ",
-                  "Private bathroom ",
-                  " Balcony ",
-                  "View ",
-                  "Air conditioning ",
-                  "Flat-screen TV",
-                  "Soundproofing"
-              ],
-              "numberRooms": 0,
-              "images": null
-          }
-        ], 
+      "rooms": [], 
       "roomNumber": {}
   });
 
@@ -81,7 +64,7 @@ const Hotel = () => {
         }
       )
       setData(apiData.data)
-      // console.log("data: ", data)
+      console.log("data: ", data)
     }
   fetchData();
 }, [])
@@ -98,17 +81,7 @@ const Hotel = () => {
   }, [selection])
   const {city, dates, options, dispatch } = useContext(SearchContext);
 
-  // const listDownRoom = (room) => {
-  //   let list = [];
-  //   console.log(room)
-  //   for(let i = 0; i < 1; i++) {
-  //     list.push(
-  //       <option value={i}>{i}  (VND {room.price * i})</option>
-  //     )
-  //   }
-
-  //   return list;
-  // }
+ 
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -199,12 +172,6 @@ const Hotel = () => {
           <div className="hotelWrapper">
             <button className="bookNow" onClick={handleClick}>Reserve or Book Now!</button>
             <h1 className="hotelTitle">{data === undefined ? "" : data.nameHotel}</h1>
-            
-            {/* <div className="hotelAddress">
-              <FontAwesomeIcon icon={faLocationDot} />
-              <span>{data === undefined ? "" : data.location}</span>
-            </div> */}
-
             <div className='my-3'>
                     <FaMapMarkerAlt
                         className='me-2'

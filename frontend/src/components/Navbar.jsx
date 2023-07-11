@@ -11,7 +11,7 @@ const Navbar = () => {
   const [hovered, setHovered] = useState(false);
   const navigate = useNavigate()
   const { id } = useParams()
-  const name = localStorage.getItem("user")
+  const name = localStorage.getItem("username")
   const handleMouseEnter = () => {
     setHovered(true);
   };
@@ -53,15 +53,7 @@ const Navbar = () => {
           {user? (
             <>
               <div>
-                <OverlayTrigger
-                  placement='bottom'
-                  overlay={hoverHelp}
-                  delay={{ show: 250, hide: 400 }}
-                >
-                  <Link to="/help" className='mx-3'>
-                    <FaQuestionCircle className="border-0" style={{ fontSize: '24px',color:"#FFFF66"}} />
-                  </Link>
-                </OverlayTrigger>
+               
 
                 <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
                   <Button className={`

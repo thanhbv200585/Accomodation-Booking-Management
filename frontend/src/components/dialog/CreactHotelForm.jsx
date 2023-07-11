@@ -12,7 +12,7 @@ const CreateHotelForm = ({ visible, onHide }) => {
     location: '',
     shortDescription: '',
     detailDescription: '',
-    assess: '',
+    assess: 0,
     avatarHotel: ''
   });
   const [initialFormData] = useState({ ...formData })
@@ -21,6 +21,7 @@ const CreateHotelForm = ({ visible, onHide }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const parsedValue = name === 'assess' ? parseInt(value) : value;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -95,7 +96,7 @@ const CreateHotelForm = ({ visible, onHide }) => {
         <Form.Group controlId="assess">
           <Form.Label>Assess:</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
             name="assess"
             value={formData.assess}
             onChange={handleChange}

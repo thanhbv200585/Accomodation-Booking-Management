@@ -12,6 +12,7 @@ import EditHotelForm from "../components/dialog/edithotelform"
 import NewRoomForm from "../components/dialog/NewRoomForm"
 import AllBooking from "../components/dialog/allBooking"
 import "primereact/resources/themes/lara-light-indigo/theme.css"; // theme
+import EachRoom from "../components/EachRoom"
 import "primereact/resources/primereact.css"; // core css
 import "primeicons/primeicons.css"; // icons
 
@@ -23,7 +24,7 @@ const HotelDetailForOwner = () => {
     const [edithotelform, setEdithotelform] = useState(false)
     const [visibleNewRoom, setVisibleNewRoom] = useState(false)
     const [visibleBooking, setVisibleBooking] = useState(false)
-
+    const [rooms, setRooms] = useState([])
     useEffect(() => {
         const getDataHotel = async () => {
             try {
@@ -31,6 +32,8 @@ const HotelDetailForOwner = () => {
                 // console.log(hotelId)
                 setDatahotel(res.data)
                 // console.log(datahotel)
+                setRooms(res.data.rooms)
+                console.log(rooms)
             }
             catch (err) {
                 console.log(err)
@@ -62,9 +65,9 @@ const HotelDetailForOwner = () => {
                 visible={edithotelform} onHide={handledithotelform}
             />
             <Navbar />
-            <Container>
-                <div>
-                    <h2>{datahotel.nameHotel}</h2>
+            <Container style={{maxWidth:"1024px"}}>
+                <div className="mt-3 fs-2 fw-bold">
+                    {datahotel.nameHotel}
                 </div>
                 <div className='my-3'>
                     <FaMapMarkerAlt
@@ -78,7 +81,7 @@ const HotelDetailForOwner = () => {
                 <Row>
                     <Col sm={3}>
                         <Image src={datahotel.avatarHotel}
-                            style={{ width: "30vw", height: "30vw" }}
+                            style={{ width: "200px", height: "200px" }}
                         />
                     </Col>
                     <Col
@@ -110,6 +113,12 @@ const HotelDetailForOwner = () => {
                 </div>
                 <div className="fw-light my-2">
                     {datahotel.detailDescription}
+                </div>
+
+                <div>
+                    {rooms.map((room,index)=>
+                        <EachRoom room={room} key={index}/>
+                    )}
                 </div>
 
             </Container>

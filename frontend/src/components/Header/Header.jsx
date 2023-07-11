@@ -67,16 +67,6 @@ const Header = ({ type }) => {
           type === "list" ? "headerContainer listMode" : "headerContainer"
         }
       >
-        {/* <div className="headerList">
-          {labels.map(label => (
-            <div key={label.name}
-              className={`${active == label.name ? 'active' : ''} headerListItem`}
-              onClick={() => setActive(label.name)}>
-              <FontAwesomeIcon icon={label.icon} />
-              <span>{label.name}</span>
-            </div>
-          ))}
-        </div> */}
         {type !== "list" && (
           <>
             <h1 className="headerTitle">
