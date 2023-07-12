@@ -9,16 +9,17 @@ const AllBooking = ({ visible, onHide }) => {
     const [listbooking, setListbooking] = useState([])
     const { id, hotelId } = useParams()
     useEffect(() => {
-        try {
-            const getAllbooking = async () => {
+        const getAllbooking = async () => {
+            try {
                 const res = await ownerApi.getAllBooking(id, hotelId)
                 console.log(res)
                 setListbooking(res.data)
             }
+            catch (err) {
+                console.log(err)
+            }
         }
-        catch (err) {
-            console.log(err)
-        }
+        getAllbooking()
     }, [])
 
     if (!listbooking)
@@ -27,6 +28,7 @@ const AllBooking = ({ visible, onHide }) => {
                 Loading...
             </div>
         )
+
     return (
         <Dialog
             visible={visible}

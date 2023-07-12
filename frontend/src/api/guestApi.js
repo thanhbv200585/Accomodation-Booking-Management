@@ -28,6 +28,13 @@ const guestApi = {
         const url = `${PREFIX}/hotels/${id}/detail`
         return axiosClient.get(url)
     },
+    viewHotelDetailpost:(id) =>{
+        const url = `${PREFIX}/hotels/${id}/detail`
+        return axiosClient.post(url, {
+            checkIn: "2023-06-27",
+            checkOut: "2023-06-28"
+          })
+    }
 };
 
 export default guestApi;

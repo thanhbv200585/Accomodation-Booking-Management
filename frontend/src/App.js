@@ -8,9 +8,9 @@ import Cushome from "./pages/Cushome"
 import Cusinfo from "./pages/Cusinfo"
 import Owner from "./pages/Owner"
 import Admin from "./pages/Admin";
-import HotelDetailForOwner from "./pages/HotelDetailForOwner";
 import CusHotel from "./pages/CusHotel";
-
+import HotelDetailForOwner from "./pages/HotelDetailForOwner"
+import BookingPage from "./pages/booking/BookingPage";
 function App() {
   return (
     <Router>
@@ -27,6 +27,7 @@ function App() {
         <Route path="/hotels" element={<List/>}/>
         <Route path="/hotels/:hotelId" element={<Hotel/>}/>
         <Route path="/owner/:id/hotel/:hotelId" element={<HotelDetailForOwner/>}/>
+        <Route path="/customer/:id/booking" element={<BookingPage/>}/>
       </Routes>
     </Router>
   );

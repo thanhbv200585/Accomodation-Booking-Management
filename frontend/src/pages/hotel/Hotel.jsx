@@ -13,7 +13,7 @@ import {
 import { FaMapMarkerAlt, FaInfoCircle } from 'react-icons/fa'
 
 import { useContext, useState } from "react";
-import { useLocation, useNavigate, useParams} from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
@@ -21,7 +21,9 @@ import { useEffect } from "react";
 import Room from "../room/Room";
 
 const Hotel = () => {
-  const {hotelId} = useParams()
+  const { hotelId } = useParams()
+  const location = useLocation();
+  // const hotelId = location.pathname.split("/")[2];  thành
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState({});
@@ -38,8 +40,8 @@ const Hotel = () => {
     "images": []
   }
   const [clickedRoom, setClickedRoom] = useState(INITIAL_CLICKED_ROOM)
-  
-  const [data,setData] = useState(
+
+  const [data, setData] = useState(
     {
       "id": null,
       "nameHotel": "",
@@ -50,24 +52,23 @@ const Hotel = () => {
       "assess": 4,
       "avatarHotel": "",
       "numberRating": 0,
-      "rooms": [], 
+      "rooms": [],
       "roomNumber": {}
-  });
+    });
 
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchData = async () => {
       const url = `http://localhost:8082/api/guest/hotels/${hotelId}/details`
       var apiData = await axios.post(url, {
-          checkIn: "2023-06-27",
-          checkOut: "2023-06-28"
-        }
+        checkIn: "2023-06-27",
+        checkOut: "2023-06-28"
+      }
       )
       setData(apiData.data)
-      console.log("data: ", data)
     }
-  fetchData();
-}, [])
+    fetchData();
+  }, [])
 
   useEffect(() => {
     let total = 0;
@@ -78,10 +79,9 @@ const Hotel = () => {
     })
     setTotalPrice(total * days);
     // console.log(totalPrice)
+    // console.log("selection", selection)
   }, [selection])
-  const {city, dates, options, dispatch } = useContext(SearchContext);
-
- 
+  const { city, dates, options, dispatch } = useContext(SearchContext);
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -115,11 +115,25 @@ const Hotel = () => {
     setSlideNumber(newSlideNumber);
   };
 
+  const isObjectEmpty = (objectName) => {
+    return (
+      objectName &&
+      Object.keys(objectName).length === 0 &&
+      objectName.constructor === Object
+    );
+  };
+
   const handleClick = () => {
     if (user) {
-      console.log(user)
-      navigate(`/customer/booking/${user.accountId}`)
-      // dispatch({ type: "NEW_SEARCH", payload: { city, dates, options } })
+      console.log("selection: ", selection)
+      if (isObjectEmpty(selection)) {
+        alert("Please select your room");
+      } else {
+        console.log(user)
+        const id = localStorage.getItem("accountId")
+        navigate(`/customer/${id}/booking`, { state: { "booking": selection, "price": totalPrice, "id": hotelId } })
+        dispatch({ type: "NEW_SEARCH", payload: { city, dates, options } })
+      }
     } else {
       navigate("/login");
     }
@@ -129,132 +143,131 @@ const Hotel = () => {
     setOpenPopup(true);
     setClickedRoom(room);
   }
-  if(!data)
-  return(
-    <div>
-      Loading...
-    </div>
-  )
+  if (!data)
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+    console.log("data: ", data)
   return (
     <div>
       <Navbar />
       <Header type="list" />
-      {data === undefined ? (
-        "loading"
-      ) : (
-        <div className="hotelContainer">
-          {open && (
-            <div className="slider">
-              <FontAwesomeIcon
-                icon={faCircleXmark}
-                className="close"
-                onClick={() => setOpen(false)}
-              />
-              <FontAwesomeIcon
-                icon={faCircleArrowLeft}
-                className="arrow"
-                onClick={() => handleMove("l")}
-              />
-              <div className="sliderWrapper">
-                <img
-                  src={data.photos[slideNumber]}
-                  alt=""
-                  className="sliderImg"
-                />
-              </div>
-              <FontAwesomeIcon
-                icon={faCircleArrowRight}
-                className="arrow"
-                onClick={() => handleMove("r")}
+
+      <div className="hotelContainer">
+        {open && (
+          <div className="slider">
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              className="close"
+              onClick={() => setOpen(false)}
+            />
+            <FontAwesomeIcon
+              icon={faCircleArrowLeft}
+              className="arrow"
+              onClick={() => handleMove("l")}
+            />
+            <div className="sliderWrapper">
+              <img
+                src={data.photos[slideNumber]}
+                alt=""
+                className="sliderImg"
               />
             </div>
-          )}
-          <div className="hotelWrapper">
-            <button className="bookNow" onClick={handleClick}>Reserve or Book Now!</button>
-            <h1 className="hotelTitle">{data === undefined ? "" : data.nameHotel}</h1>
-            <div className='my-3'>
-                    <FaMapMarkerAlt
-                        className='me-2'
-                    />
-                    <span
-                        className="fs-6 fst-italic"
-                        style={{ color: "#0000FF" }}
-                    >
-                      {data === undefined ? "" : data.location}
-                    </span>
-                </div>
+            <FontAwesomeIcon
+              icon={faCircleArrowRight}
+              className="arrow"
+              onClick={() => handleMove("r")}
+            />
+          </div>
+        )}
+        <div className="hotelWrapper">
+          <button className="bookNow" onClick={handleClick}>Reserve or Book Now!</button>
+          <h1 className="hotelTitle">{data === undefined ? "" : data.nameHotel}</h1>
+          <div className='my-3'>
+            <FaMapMarkerAlt
+              className='me-2'
+            />
+            <span
+              className="fs-6 fst-italic"
+              style={{ color: "#0000FF" }}
+            >
+              {data === undefined ? "" : data.location}
+            </span>
+          </div>
 
-            <div className="hotelImages">
-                <div className="hotelImgWrapper">
-                  <img
-                    onClick={() => handleOpen(0)}
-                    src={data.avatarHotel}
-                    alt=""
-                    className="hotelImg"
-                  />
-                </div>
+          <div className="hotelImages">
+            <div className="hotelImgWrapper">
+              <img
+                onClick={() => handleOpen(0)}
+                src={data.avatarHotel}
+                alt=""
+                className="hotelImg"
+              />
             </div>
+          </div>
 
-            <div className="hotelDetails">
-              <div className="hotelDetailsTexts">
-                <h1 className="hotelTitle">{data.nameHotel}</h1>
-                <p className="hotelDesc">{data.detailDescription}</p>
-              </div>
-              <div className="hotelDetailsPrice">
-                <h1>Perfect for a {days}-night stay!</h1>
-                <span>
-                  Located in the real heart of Krakow, this property has an
-                  excellent location score of {data.score}!
-                </span>
-                <h3>
-                  <b>VND {totalPrice}</b> ({days}{" "}
-                  nights)
-                </h3>
-                <button onClick={handleClick}>Reserve or Book Now!</button>
-              </div>
+          <div className="hotelDetails">
+            <div className="hotelDetailsTexts">
+              <h1 className="hotelTitle">{data.nameHotel}</h1>
+              <p className="hotelDesc">{data.detailDescription}</p>
             </div>
+            <div className="hotelDetailsPrice">
+              <h1>Perfect for a {days}-night stay!</h1>
+              <span>
+                Located in the real heart of Krakow, this property has an
+                excellent location score of {data.score}!
+              </span>
+              <h3>
+                <b>VND {totalPrice}</b> ({days}{" "}
+                nights)
+              </h3>
+              <button onClick={handleClick}>Reserve or Book Now!</button>
+            </div>
+          </div>
 
-            <div className="roomTable">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th className="column">Accomodation type</th>
-                    <th className="column">Price for {days} nights</th>
-                    <th className="column">Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.rooms.map((room, index) => {
+          <div className="roomTable">
+            <table className="table">
+              <thead className="thead">
+                <tr>
+                  <th className="column">Accomodation type</th>
+                  <th className="column">Price for {days} nights</th>
+                  <th className="column">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.rooms.map((room, index) => {
                   return (
                     <tr key={index}>
                       <td className="column"><button className="room-type" onClick={() => handleRoomClick(room)}>{room.roomType}</button></td>
                       <td className="column">{
-                        <select name="numberRoom" onChange={(e)=> {
+                        <select name="numberRoom" onChange={(e) => {
                           setSelection({
-                              ...selection, 
-                              [room.roomType] : e.target.value.split(' ')[0]
-                            })
-                            console.log(selection)
+                            ...selection,
+                            [room.roomType]: e.target.value.split(' ')[0]
+                          })
+                          console.log(selection)
                         }}>
                           {[...Array(data.roomNumber[room.roomType] !== undefined ? data.roomNumber[room.roomType] + 1 : 1).keys()].map((num) => (
                             <option key={num}>{num}   (VND {num * room.price})</option>
-                        ))}
+                          ))}
                         </select>
                       }</td>
                       <td className="column-price">VND {room.price}</td>
                       <Room trigger={openPopup} setTrigger={setOpenPopup} data={clickedRoom}>
                       </Room>
                     </tr>
-                  )})}
-                </tbody>
-              </table>
-              
-            </div>
+                  )
+                })}
+              </tbody>
+            </table>
+
           </div>
-          <MailList />
-          <Footer />
         </div>
-      )}
+        <MailList />
+        <Footer />
+      </div>
     </div>
   );
 };

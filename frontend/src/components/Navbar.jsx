@@ -41,7 +41,7 @@ const Navbar = () => {
 
 
 
-  console.log(user)
+  // console.log(user)
   return (
     <div className="d-flex justify-content-center"
     style={{ height: "6vh", background: "#0066FF" }}>
@@ -92,11 +92,9 @@ const Navbar = () => {
             </div>
 
           )}
-
-
       </div>
     </div>
-  );
+  )
 };
 
 export default Navbar;

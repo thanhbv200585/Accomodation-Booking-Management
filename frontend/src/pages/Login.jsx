@@ -36,11 +36,12 @@ const Login = () => {
     try {
       const res = await axios.post(url, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.role});
-      console.log("res of login in order to get id token: ", res)
+      // console.log("res of login in order to get id token: ", res)
       localStorage.setItem("TOKEN",res.data.token)
       const resinfo = await accountApi.infor(res.data.accountId)
+      // localStorage.setItem("user", resinfo.data.name)   thành
+      // localStorage.setItem("accountId", res.data.accountId)
 
-      // console.log(resinfo)
       localStorage.setItem('user',1)
       localStorage.setItem("username", resinfo.data.name)
       navigate(`/${res.data.role.toLowerCase()}/${res.data.accountId}`)

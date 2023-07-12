@@ -11,8 +11,8 @@ import { Button } from 'primereact/button';
 import EditHotelForm from "../components/dialog/edithotelform"
 import NewRoomForm from "../components/dialog/NewRoomForm"
 import AllBooking from "../components/dialog/allBooking"
+import AllRoom from "../components/ListRoom/AllRoom"
 import "primereact/resources/themes/lara-light-indigo/theme.css"; // theme
-import EachRoom from "../components/EachRoom"
 import "primereact/resources/primereact.css"; // core css
 import "primeicons/primeicons.css"; // icons
 
@@ -24,7 +24,8 @@ const HotelDetailForOwner = () => {
     const [edithotelform, setEdithotelform] = useState(false)
     const [visibleNewRoom, setVisibleNewRoom] = useState(false)
     const [visibleBooking, setVisibleBooking] = useState(false)
-    const [rooms, setRooms] = useState([])
+    // const [rooms, setRooms] = useState([])
+    // console.log(rooms)
     useEffect(() => {
         const getDataHotel = async () => {
             try {
@@ -32,8 +33,8 @@ const HotelDetailForOwner = () => {
                 // console.log(hotelId)
                 setDatahotel(res.data)
                 // console.log(datahotel)
-                setRooms(res.data.rooms)
-                console.log(rooms)
+                // setRooms(res.data.rooms)
+                // console.log(rooms)
             }
             catch (err) {
                 console.log(err)
@@ -114,11 +115,11 @@ const HotelDetailForOwner = () => {
                 <div className="fw-light my-2">
                     {datahotel.detailDescription}
                 </div>
-
+                <div className="fs-3 text-center">
+                    <b>All Rooms</b>
+                </div>
                 <div>
-                    {rooms.map((room,index)=>
-                        <EachRoom room={room} key={index}/>
-                    )}
+                    <AllRoom/>
                 </div>
 
             </Container>
