@@ -44,16 +44,27 @@ const AllBooking = ({ visible, onHide }) => {
             }
         >
             {listbooking.map((booking) => (
-                <div key={booking.bookingId}>
-                    <h3>Booking ID: {booking.bookingId}</h3>
-                    <p>Name: {booking.nameCustomer}</p>
-                    <p>Phone: {booking.phoneCustomer}</p>
-                    <p>Check-in: {new Date(booking.dateCheckIn).toLocaleDateString()}</p>
-                    <p>Check-out: {new Date(booking.dateCheckOut).toLocaleDateString()}</p>
-                    <p>Status: {booking.status}</p>
-                    <p>Total Bill: {booking.totalBill}</p>
-                    <p>Description: {booking.description}</p>
-                    <p>Room IDs: {booking.listRoomId.join(', ')}</p>
+                <div className='d-flex m-2 border-5 justify-content-around'>
+                    <div
+                        key={booking.bookingId}>
+                        {/* <h3>Booking ID: {booking.bookingId}</h3> */}
+                        <p><b>Name:</b> {booking.nameCustomer}</p>
+                        <p><b>Phone:</b> {booking.phoneCustomer}</p>
+                        <p><b>Check-in:</b> {new Date(booking.dateCheckIn).toLocaleDateString()}</p>
+                        <p><b>Check-out:</b> {new Date(booking.dateCheckOut).toLocaleDateString()}</p>
+                        {/* <p>Status: {booking.status}</p> */}
+                        <p><b>Total Bill:</b> {booking.totalBill} đ</p>
+                        <p><b>Description:</b> {booking.description}</p>
+                        <p><b>Room IDs:</b> {booking.listRoomId.join(', ')}</p>
+                    </div>
+                    <div
+                    className='d-flex justify-content-center align-items-center'
+                    >
+                        <Button
+                        severity="danger"
+                        label='Delete'
+                        />
+                    </div>
                 </div>
             ))}
 
