@@ -44,8 +44,8 @@ const Navbar = () => {
   // console.log(user)
   return (
     <div className="d-flex justify-content-center"
-    style={{ height: "6vh", background: "#0066FF" }}>
-      <div className="d-flex align-items-center justify-content-between text-white" style={{ maxWidth: "1024px", width: "100%" }}>
+    style={{ height: "6vh", background: "#0066FF"}}>
+      <div className="d-flex align-items-center justify-content-between text-white p-2" style={{ maxWidth: "1024px", width: "100%" }}>
         <div onClick={() => { navigate(-1) }} style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}>
           <span className="fw-bold">l am a booking</span>
         </div>
@@ -53,8 +53,6 @@ const Navbar = () => {
           {user? (
             <>
               <div>
-               
-
                 <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
                   <Button className={`
           ${isBellActive ? 'active' : 'bg-transparent'}

@@ -24,7 +24,7 @@ const SearchItem = ({ item }) => {
       <img src={item.avatarHotel} alt="" className="siImg" />
       <div className="siDesc">
         <h1 className="siTitle">
-          <Link to={`/hotels/${item.id}`} state={{item: item}} style={{textDecoration:"none"}}>
+          <Link to={`/hotels/${item.id}`} style={{textDecoration:"none"}}>
             {item.nameHotel}
           </Link>
         </h1>

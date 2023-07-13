@@ -21,13 +21,13 @@ function App() {
         <Route path="/customer/:id" element={<Cushome/>}/>
         <Route path="/customer/:id/hotels" element={<CusHotel/>}/>
         <Route path="/customer/:id/hotels/:hotelId" element={<Hotel/>}/>
+        <Route path="/customer/:id/booking/:hotelId" element={<BookingPage/>}/>
         <Route path="/account/:id/info" element={<Cusinfo/>}/>
         <Route path="/owner/:id" element={<Owner/>}/>
         <Route path="/admin/:id" element={<Admin/>}/>
         <Route path="/hotels" element={<List/>}/>
         <Route path="/hotels/:hotelId" element={<Hotel/>}/>
         <Route path="/owner/:id/hotel/:hotelId" element={<HotelDetailForOwner/>}/>
-        <Route path="/customer/booking/:id" element={<BookingPage/>}/>
       </Routes>
     </Router>
   );

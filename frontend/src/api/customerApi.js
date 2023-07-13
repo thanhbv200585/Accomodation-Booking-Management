@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const PREFIX = "/customer";
 
-const ownerApi = {
+const customerApi = {
     //create new hotel
     newHotel: (id, data) => {
         const url = `${PREFIX}/${id}/newHotel`;
@@ -20,7 +20,11 @@ const ownerApi = {
     viewAllBooking: (id) =>{
         const url = `${PREFIX}/${id}/booking/all`
         return axiosClient.get(url)
-    }
+    },
+    cancelBookingByCustomer: (accountId, bookingId, reason) => {
+        const url = `${PREFIX}/${accountId}/${bookingId}/cancelBooking?reason=${reason}`;
+        return axiosClient.delete(url)
+    }  
 };
 
-export default ownerApi;
+export default customerApi;

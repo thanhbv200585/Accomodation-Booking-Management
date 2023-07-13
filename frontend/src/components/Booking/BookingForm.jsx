@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Modal from 'react-modal';
+import { useParams } from "react-router-dom";
 
 const BookingForm = (props) => {
     const { setShowModal } = props
@@ -8,8 +9,8 @@ const BookingForm = (props) => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [description, setDescription] = useState("");
 
-    const accountId = localStorage.getItem("accountId");
-    const url = `http://localhost:8082/api/customer/${accountId}/booking/new`
+    const { id } = useParams();
+    const url = `http://localhost:8082/api/customer/${id}/booking/new`
     const token = localStorage.getItem("TOKEN")
     const config = { "headers": {'Authorization': `Bearer ${token}`}}
     console.log(config)
@@ -20,9 +21,10 @@ const BookingForm = (props) => {
             ...booking,
             description
         }
-        setShowModal(true)
+        console.log(booking)
         axios.post(url, booking, config).then((res) => {
           console.log(res)
+          setShowModal(true)
         }).catch((err) => console.error(err))
     };
 
@@ -80,7 +82,7 @@ const BookingForm = (props) => {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="submit"
         >
-          Booking
+          Book Now
         </button>
       </div>
 

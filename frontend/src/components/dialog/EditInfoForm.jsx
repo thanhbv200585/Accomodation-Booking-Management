@@ -40,7 +40,6 @@ const EditInfoForm = ({ visible, onHide }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         try {
             const response = await accountApi.update(id, formData)
             localStorage.setItem("username",formData.name)

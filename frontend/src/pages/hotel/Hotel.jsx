@@ -8,22 +8,18 @@ import {
   faCircleArrowLeft,
   faCircleArrowRight,
   faCircleXmark,
-  faLocationDot,
 } from "@fortawesome/free-solid-svg-icons"
 import { FaMapMarkerAlt, FaInfoCircle } from 'react-icons/fa'
 
-import { useContext, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { useNavigate, useParams} from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
-import { useEffect } from "react";
 import Room from "../room/Room";
 
 const Hotel = () => {
-  const { hotelId } = useParams()
-  const location = useLocation();
-  // const hotelId = location.pathname.split("/")[2];  thành
+  const {hotelId, id} = useParams()
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState({});
@@ -130,8 +126,7 @@ const Hotel = () => {
         alert("Please select your room");
       } else {
         console.log(user)
-        const id = localStorage.getItem("accountId")
-        navigate(`/customer/${id}/booking`, { state: { "booking": selection, "price": totalPrice, "id": hotelId } })
+        navigate(`/customer/${id}/booking/${hotelId}`, {state: {"booking": selection, "price": totalPrice, "id": hotelId}})
         dispatch({ type: "NEW_SEARCH", payload: { city, dates, options } })
       }
     } else {
@@ -238,6 +233,7 @@ const Hotel = () => {
                 </thead>
                 <tbody>
                   {data.rooms.map((room, index) => {
+                    console.log(room)
                   return (
                     <tr key={index}>
                       <td className="column"><button className="room-type" onClick={() => handleRoomClick(room)}>{room.roomType}</button></td>
