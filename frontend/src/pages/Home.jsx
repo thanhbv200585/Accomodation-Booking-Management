@@ -17,10 +17,8 @@ const Home = () => {
       <Header/>
       <div className="mt-5 d-flex align-items-center gap-3 flex-column">
         <Featured/>
-        <h1 className="fs-4" style={{width: "1024px"}}>Browse by property type</h1>
-        <PropertyList/>
-        <h1 className="fs-4" style={{width: "1024px"}}>Homes guests love</h1>
-        {/* <FeaturedProperties/> */}
+        <h1 className="text-3xl font-bold" style={{width: "1024px"}}>Homes guests love</h1>
+        <PropertyList />
         <MailList/>
         <Footer/>
       </div>

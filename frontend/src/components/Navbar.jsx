@@ -47,7 +47,7 @@ const Navbar = () => {
     style={{ height: "6vh", background: "#0066FF"}}>
       <div className="d-flex align-items-center justify-content-between text-white p-2" style={{ maxWidth: "1024px", width: "100%" }}>
         <div onClick={() => { navigate(-1) }} style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}>
-          <span className="fw-bold">l am a booking</span>
+          <span className="fw-bold text-xl">vietbooking</span>
         </div>
 
           {user? (

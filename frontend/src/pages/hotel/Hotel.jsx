@@ -179,7 +179,7 @@ const Hotel = () => {
         )}
         <div className="hotelWrapper">
           <button className="bookNow" onClick={handleClick}>Reserve or Book Now!</button>
-          <h1 className="hotelTitle">{data === undefined ? "" : data.nameHotel}</h1>
+          <h1 className="text-xl font-bold text-[#003b95] hover:text-[#000]">{data === undefined ? "" : data.nameHotel}</h1>
           <div className='my-3'>
             <FaMapMarkerAlt
               className='me-2'
@@ -205,7 +205,7 @@ const Hotel = () => {
 
           <div className="hotelDetails">
             <div className="hotelDetailsTexts">
-              <h1 className="hotelTitle">{data.nameHotel}</h1>
+              <h1 className="text-xl font-bold">{data.nameHotel}</h1>
               <p className="hotelDesc">{data.detailDescription}</p>
             </div>
             <div className="hotelDetailsPrice">
@@ -221,7 +221,6 @@ const Hotel = () => {
               <button onClick={handleClick}>Reserve or Book Now!</button>
             </div>
           </div>
-
             <div className="roomTable">
               <table className="table">
                 <thead className="thead">
@@ -257,9 +256,8 @@ const Hotel = () => {
                   )
                 })}
               </tbody>
-            </table>
-
-          </div>
+              </table>
+            </div>
         </div>
         <MailList />
         <Footer />

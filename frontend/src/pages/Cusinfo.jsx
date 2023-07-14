@@ -88,8 +88,8 @@ const Cusinfo = () => {
                 <EditInfoForm
                 visible={editing}
                 onHide={() => setEditing(false)} />
-                <h1>Personal information</h1>
-                <Card className="border-0">
+                <h1 className="text-xl font-bold">Personal information</h1>
+                <Card className="border-0 font-semibold">
                     <Card.Body>
                         <div className="info-item">
                             <div className="d-inline-block rounded-circle me-2 mt-3" style={{ background: "#a2a2a2" }}>
@@ -130,7 +130,7 @@ const Cusinfo = () => {
     const Security = () => {
         return (
             <div>
-                <h1>Safe and secure</h1>
+                <h1 className="text-xl font-bold">Safe and secure</h1>
                 <div className="mt-5 text-center">
                     {
                         usernameblock ? (
