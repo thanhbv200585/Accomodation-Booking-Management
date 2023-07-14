@@ -5,14 +5,14 @@ import { Form } from 'react-bootstrap'
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 
-const WriteNoti = ({ visible, onHide }) => {
+const WriteNoti = ({ visible, onHide,userId }) => {
     const [message, setMessage] = useState('');
     const {id} = useParams()
     const handleInputChange = (event) => {
         setMessage(event.target.value);
     };
     const handleSubmit = () => {
-        adminApi.sendNoti(id,message)
+        adminApi.sendNoti(id,userId,message)
             .then(res => {
                 console.log(res)
             })

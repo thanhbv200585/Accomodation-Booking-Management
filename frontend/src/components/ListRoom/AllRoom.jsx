@@ -12,7 +12,7 @@ const AllRoom = () =>{
         const fetchData = async ()=>{
             try{
                 const res = await ownerApi.hotelDetail(id, hotelId)
-                console.log(res.data)
+                // console.log(res.data)
                 setRooms(res.data.rooms)
                 setRoomType(res.data.roomNumber)
             }
@@ -22,7 +22,7 @@ const AllRoom = () =>{
         }
         fetchData()
     },[])
-    console.log(roomType)
+    // console.log(roomType)
     if(!rooms)
     return(
         <div>

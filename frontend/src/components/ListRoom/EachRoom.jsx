@@ -13,7 +13,7 @@ const EachRoom = ({ room, numberRoom }) => {
     const prevSlide = () => {
         setSlide(slide === 0 ? room.images.length - 1 : slide - 1)
     }
-    console.log(room)
+    // console.log(room)
     return (
         <Row className='d-flex m-3 border border-5'>
             {/* //avatar */}

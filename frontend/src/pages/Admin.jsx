@@ -13,7 +13,6 @@ const Admin = () => {
     const [accounts, setAccount] = useState([])
     const { id } = useParams()
     const [editing, setEditing] = useState(false)
-    const [noti, setNoti] = useState(false)
     useEffect(() => {
         const getInfo = async () => {
             try {
@@ -60,10 +59,7 @@ const Admin = () => {
                 visible={editing}
                 onHide={() => setEditing(false)}
             />
-            <WriteNoti
-                visible={noti}
-                onHide={() => setNoti(false)}
-            />
+            
             {/* sidebar */}
             <div
                 className='d-flex flex-column align-items-center'
@@ -124,16 +120,7 @@ const Admin = () => {
                             {info.address}
                         </div>
                     </div>
-                    <div
-                        className='d-flex justify-content-center'
-                    >
-                        <Button
-                            icon='pi pi-send'
-                            label="Send Notification" className="p-button-text p-button-info my-2"
-                            style={{ width: "20vw" }}
-                            onClick={() => setNoti(true)}
-                        />
-                    </div>
+                    
                 </div>
                 <div>
                     <Button

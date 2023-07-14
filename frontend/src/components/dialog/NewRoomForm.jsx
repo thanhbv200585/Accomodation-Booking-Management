@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Dialog } from "primereact/dialog"
 import { Button } from "primereact/button"
-import { Form, Modal } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import ownerApi from '../../api/ownerApi'
 
 const NewRoomForm = ({ visible, onHide }) => {
