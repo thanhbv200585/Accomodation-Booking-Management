@@ -8,8 +8,6 @@ import { AuthContext } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 
 const Cushome = () => {
-    // const { id } = useParams();
-    
     const {user} = useContext(AuthContext)
     console.log("user: ",user)
    

@@ -1,8 +1,16 @@
+import { useNavigate, useParams } from "react-router-dom";
 import "./featured.css";
 
 const Featured = () => {
+  const navigate = useNavigate()
+  const { id } = useParams()
   const handleClick = (city) => {
     console.log(city)
+    navigate(`/customer/${id}/hotels`, { state: { 'destination': city, "dates": "", "options": {
+      "adult": 1,
+      "children": 0,
+      "room": 1
+    } } })
   }
 
   return (
