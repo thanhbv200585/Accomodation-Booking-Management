@@ -25,6 +25,15 @@ const ownerApi = {
     getAllBooking: (id, idHotel) =>{
         const url = `${PREFIX}/${id}/${idHotel}/getAllBooking`
         return axiosClient.get(url)
+    },
+    hotelDetail: (id, idHotel) =>{
+        const url = `${PREFIX}/${id}/${idHotel}/detail`
+        return axiosClient.get(url)
+    },
+    // localhost:8082/api/owner/{idAccount}/{idHotel}/cancelBooking?idBooking=21&reason=sada
+    cancelBooking:(id, hotelId, reason)=>{
+        const url = `${id}/${hotelId}/cancelBooking?idBooking=idBooking=21&reason=sada`
+        return axiosClient.post(url, reason)
     }
 };
 

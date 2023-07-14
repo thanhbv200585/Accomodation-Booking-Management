@@ -21,7 +21,7 @@ import { useEffect } from "react";
 import Room from "../room/Room";
 
 const Hotel = () => {
-  const { hotelId } = useParams()
+  const { id, hotelId } = useParams()
   const location = useLocation();
   // const hotelId = location.pathname.split("/")[2];  thành
   const [slideNumber, setSlideNumber] = useState(0);
@@ -130,7 +130,6 @@ const Hotel = () => {
         alert("Please select your room");
       } else {
         console.log(user)
-        const id = localStorage.getItem("accountId")
         navigate(`/customer/${id}/booking`, { state: { "booking": selection, "price": totalPrice, "id": hotelId } })
         dispatch({ type: "NEW_SEARCH", payload: { city, dates, options } })
       }

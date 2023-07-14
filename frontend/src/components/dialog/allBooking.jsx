@@ -44,7 +44,7 @@ const AllBooking = ({ visible, onHide }) => {
             }
         >
             {listbooking.map((booking) => (
-                <div className='d-flex m-2 border-5 justify-content-around'>
+                <div className='d-flex m-2 border-5 justify-content-between'>
                     <div
                         key={booking.bookingId}>
                         {/* <h3>Booking ID: {booking.bookingId}</h3> */}

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Modal from 'react-modal';
+import { useParams } from "react-router-dom";
+import customerApi from "../../api/customerApi";
 
 const BookingForm = (props) => {
     const { setShowModal } = props
@@ -8,11 +10,7 @@ const BookingForm = (props) => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [description, setDescription] = useState("");
 
-    const accountId = localStorage.getItem("accountId");
-    const url = `http://localhost:8082/api/customer/${accountId}/booking/new`
-    const token = localStorage.getItem("TOKEN")
-    const config = { "headers": {'Authorization': `Bearer ${token}`}}
-    console.log(config)
+    const {id} = useParams()
     let booking = props.booking;
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -21,9 +19,10 @@ const BookingForm = (props) => {
             description
         }
         setShowModal(true)
-        axios.post(url, booking, config).then((res) => {
+        customerApi.createBooking(id, booking).then((res) => {
           console.log(res)
         }).catch((err) => console.error(err))
+
     };
 
   return (

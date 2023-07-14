@@ -1,18 +1,18 @@
 import {useState, useEffect } from "react"
 
 import { useParams } from "react-router-dom"
-import guestApi from "../../api/guestApi"
+import ownerApi from "../../api/ownerApi"
 import EachRoom from "./EachRoom"
 
 const AllRoom = () =>{
-    const {hotelId} = useParams()
+    const {id, hotelId} = useParams()
     const [rooms, setRooms] = useState([])
     const [roomType, setRoomType] = useState({})
     useEffect(()=>{
         const fetchData = async ()=>{
             try{
-                const res = await guestApi.viewHotelDetail(hotelId)
-                // console.log(res.data)
+                const res = await ownerApi.hotelDetail(id, hotelId)
+                console.log(res.data)
                 setRooms(res.data.rooms)
                 setRoomType(res.data.roomNumber)
             }
@@ -22,7 +22,7 @@ const AllRoom = () =>{
         }
         fetchData()
     },[])
-    // console.log(roomType)
+    console.log(roomType)
     if(!rooms)
     return(
         <div>
@@ -32,7 +32,7 @@ const AllRoom = () =>{
     return(
         <div>
             {rooms.map((room, index)=>(
-                <EachRoom key={index} room={room}/>
+                <EachRoom key={index} room={room} numberRoom={roomType[room.roomType]}/>
             ))}
         </div>
     )

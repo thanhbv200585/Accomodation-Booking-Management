@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Container} from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import CreateHotelForm from "../components/dialog/CreactHotelForm"
 
 import "primereact/resources/themes/lara-light-indigo/theme.css"; // theme
@@ -20,7 +20,7 @@ const Owner = () => {
 
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <CreateHotelForm
                 visible={hotelformvisible} onHide={handlehotelformhile}
             />
@@ -29,7 +29,8 @@ const Owner = () => {
             <Container className='d-flex'>
                 {/* //sidebar */}
                 <div className='position-fixed'
-                style={{ width: "20vw",  overflowY: "auto"}}>
+                    style={{ width: "20vw", overflowY: "auto" }}
+                >
                     <div className='p-3 m-2 mt-5'
                         style={{ cursor: "pointer" }}
                         onClick={() => setHotelformvisible(true)}
@@ -38,18 +39,18 @@ const Owner = () => {
                     </div>
                     <div className='p-3 m-2 mt-5'
                         style={{ cursor: "pointer" }}
-                        onClick={()=>setListhotel(!listhotel)}
+                        onClick={() => setListhotel(!listhotel)}
                     >
                         List Hotel
                     </div>
                 </div>
                 {/* //main */}
                 <div className='mt-5'
-                    style={{ width: "60vw", overflowY: "auto", marginLeft:"20vw" }}
+                    style={{ width: "60vw", overflowY: "auto", marginLeft: "20vw" }}
                 >
-                   {
-                    listhotel && <Listhotel/>
-                   }
+                    {
+                        listhotel && <Listhotel />
+                    }
                 </div>
 
             </Container>

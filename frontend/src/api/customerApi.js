@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const PREFIX = "/customer";
 
-const ownerApi = {
+const customerApi = {
     //create new hotel
     newHotel: (id, data) => {
         const url = `${PREFIX}/${id}/newHotel`;
@@ -23,4 +23,4 @@ const ownerApi = {
     }
 };
 
-export default ownerApi;
+export default customerApi;
