@@ -1,8 +1,8 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { Button, OverlayTrigger, Popover, Tooltip } from 'react-bootstrap';
-import { FaBell, FaQuestionCircle } from 'react-icons/fa';
+import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import { FaBell } from 'react-icons/fa';
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
@@ -23,11 +23,11 @@ const Navbar = () => {
     setShowNotification(!shownotification)
 
   };
-  const hoverHelp = (props) => (
-    <Tooltip id="button-tooltip" className='mt-3' {...props}>
-      Customer service
-    </Tooltip>
-  );
+  // const hoverHelp = (props) => (
+  //   <Tooltip id="button-tooltip" className='mt-3' {...props}>
+  //     Customer service
+  //   </Tooltip>
+  // );
   const showDetail = () => {
     navigate(`/account/${id}/info`)
   }
@@ -38,8 +38,6 @@ const Navbar = () => {
       </Popover.Body>
     </Popover>
   );
-
-
 
   // console.log(user)
   return (

@@ -1,17 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import "./searchItem.css";
-import { useEffect } from "react";
-import { SearchContext } from "../../context/SearchContext";
-import { useContext } from "react";
-
-const assessScale = ['Poor', 'Fair', 'Good', "Very Good", 'Excellent'];
 
 const EachHotelCus = ({ item }) => {
-
-    const { dates } = useContext(SearchContext)
     const { id } = useParams()
-    // console.log(dates)
-    // console.log(item)
     const assessment = (score) => {
         if (score < 2) return "Poor";
         else if (score >= 2 && score < 4) return "Fair";
@@ -31,7 +22,7 @@ const EachHotelCus = ({ item }) => {
                 <img src={item.avatarHotel} alt="" className="siImg" />
             </Link>
             <div className="siDesc">
-                <h1 className="siTitle">
+                <h1 className="font-bold text-[#0071c2] hover:text-[#000]">
                     <Link
                         to={`/customer/${id}/hotels/${item.id}`}
                         state={{ item: item }}

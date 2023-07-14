@@ -9,7 +9,7 @@ import {
   faCircleArrowRight,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons"
-import { FaMapMarkerAlt, FaInfoCircle } from 'react-icons/fa'
+import { FaMapMarkerAlt } from 'react-icons/fa'
 
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams} from "react-router-dom";

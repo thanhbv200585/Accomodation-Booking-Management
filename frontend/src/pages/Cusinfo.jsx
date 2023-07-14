@@ -11,7 +11,6 @@ import { faPlane, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import guestApi from "../api/guestApi"
 import BookingDeleteModal from "../components/Booking/BookingDeleteModal";
-import { format } from "date-fns";
 
 const Cusinfo = () => {
     console.log("re-render")

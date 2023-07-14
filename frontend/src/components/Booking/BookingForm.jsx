@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Modal from 'react-modal';
 import { useParams } from "react-router-dom";
 
 const BookingForm = (props) => {
