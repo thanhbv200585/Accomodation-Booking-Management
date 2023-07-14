@@ -5,12 +5,15 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import adminApi from '../api/adminApi';
 import EachAccount from '../components/account/EachAccount';
-
+import EditInfoForm from '../components/dialog/EditInfoForm';
+import { Button } from 'primereact/button';
+import WriteNoti from '../components/dialog/writeNoti';
 const Admin = () => {
     const [info, setInfo] = useState({})
     const [accounts, setAccount] = useState([])
     const { id } = useParams()
-    // console.log(id)
+    const [editing, setEditing] = useState(false)
+    const [noti, setNoti] = useState(false)
     useEffect(() => {
         const getInfo = async () => {
             try {
@@ -23,7 +26,6 @@ const Admin = () => {
         }
         getInfo()
     }, [])
-    // console.log(info)
 
     useEffect(() => {
         const getAccount = async () => {
@@ -39,6 +41,12 @@ const Admin = () => {
         getAccount()
     }, [])
 
+    const handleLogout = () => {
+        localStorage.removeItem('TOKEN');
+        localStorage.removeItem('user')
+        localStorage.removeItem('username')
+        window.location.href = '/login';
+    }
     console.log(accounts)
     if (!info && !accounts)
         return (
@@ -48,7 +56,14 @@ const Admin = () => {
         )
     return (
         <div className="d-flex">
-
+            <EditInfoForm
+                visible={editing}
+                onHide={() => setEditing(false)}
+            />
+            <WriteNoti
+                visible={noti}
+                onHide={() => setNoti(false)}
+            />
             {/* sidebar */}
             <div
                 className='d-flex flex-column align-items-center'
@@ -57,6 +72,7 @@ const Admin = () => {
                 <div
                     className='m-2 px-2 d-flex align-items-center justify-content-center'
                     style={{ width: "90%", background: "#e8dfed" }}
+
                 >
                     <div
                         className='m-2'
@@ -84,7 +100,11 @@ const Admin = () => {
                         <div style={{ fontSize: "0.8rem" }}>
                             Admin:<br></br>
                             <b
-                                style={{ fontSize: "1rem" }}>{info.name}</b>
+                                style={{ fontSize: "1rem", cursor: "pointer" }}
+                                onClick={() => setEditing(true)}
+                            >
+                                {info.name}
+                            </b>
                         </div>
 
                     </div>
@@ -104,6 +124,24 @@ const Admin = () => {
                             {info.address}
                         </div>
                     </div>
+                    <div
+                        className='d-flex justify-content-center'
+                    >
+                        <Button
+                            icon='pi pi-send'
+                            label="Send Notification" className="p-button-text p-button-info my-2"
+                            style={{ width: "20vw" }}
+                            onClick={() => setNoti(true)}
+                        />
+                    </div>
+                </div>
+                <div>
+                    <Button
+                        icon='pi pi-sign-out'
+                        label="Log out" className="p-button-text p-button-info my-2"
+                        style={{ width: "20vw" }}
+                        onClick={handleLogout}
+                    />
                 </div>
             </div>
 
@@ -114,7 +152,7 @@ const Admin = () => {
                 <div className='text-center my-3'>
                     <b
                         className='m-2 p-2'
-                        style={{ background: "#ffffff",borderRadius:".2rem" }}
+                        style={{ background: "#ffffff", borderRadius: ".2rem" }}
                     >CUSTOMERS AND MANAGERS</b>
                 </div>
                 {

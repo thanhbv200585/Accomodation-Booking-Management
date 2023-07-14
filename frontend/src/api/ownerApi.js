@@ -31,9 +31,9 @@ const ownerApi = {
         return axiosClient.get(url)
     },
     // localhost:8082/api/owner/{idAccount}/{idHotel}/cancelBooking?idBooking=21&reason=sada
-    cancelBooking:(id, hotelId, reason)=>{
-        const url = `${id}/${hotelId}/cancelBooking?idBooking=idBooking=21&reason=sada`
-        return axiosClient.post(url, reason)
+    cancelBooking:(id, hotelId, bookingId, reason)=>{
+        const url = `${PREFIX}/${id}/${hotelId}/cancelBooking)?idBooking=${bookingId}&reason=${reason}`
+        return axiosClient.delete(url)
     }
 };
 

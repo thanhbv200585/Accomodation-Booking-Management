@@ -4,9 +4,9 @@ const PREFIX = "/admin";
 
 const adminApi = {
     //create new hotel
-    sendNoti: (id) => {
+    sendNoti: (id, message) => {
         const url = `${PREFIX}/${id}/sendNoti`;
-        return axiosClient.get(url);
+        return axiosClient.post(url, message);
     },
     allAccount: (id) =>{
         const url = `${PREFIX}/${id}/allAccount`

@@ -22,6 +22,16 @@ const AllBooking = ({ visible, onHide }) => {
         getAllbooking()
     }, [])
 
+    const handleDeleteBooking = async (bookingId) =>{
+        try{
+            const reason = 'noCheckin'
+            const res = await ownerApi.cancelBooking(id, hotelId, bookingId, reason)
+            console.log(res)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
     if (!listbooking)
         return (
             <div>
@@ -63,6 +73,7 @@ const AllBooking = ({ visible, onHide }) => {
                         <Button
                         severity="danger"
                         label='Delete'
+                        onClick={() =>handleDeleteBooking(booking.bookingId)}
                         />
                     </div>
                 </div>
