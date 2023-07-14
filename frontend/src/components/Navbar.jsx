@@ -3,12 +3,16 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { FaBell } from 'react-icons/fa';
+import { useEffect } from 'react';
+import accountApi from '../api/accountApi';
+import { collapseClasses } from '@mui/material';
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
   const [isBellActive, setIsBellActive] = useState(false)
   const [shownotification, setShowNotification] = useState(false)
   const [hovered, setHovered] = useState(false);
+  const [notification, setNotification] = useState([])
   const navigate = useNavigate()
   const { id } = useParams()
   const name = localStorage.getItem("username")
@@ -23,22 +27,28 @@ const Navbar = () => {
     setShowNotification(!shownotification)
 
   };
-  // const hoverHelp = (props) => (
-  //   <Tooltip id="button-tooltip" className='mt-3' {...props}>
-  //     Customer service
-  //   </Tooltip>
-  // );
+
   const showDetail = () => {
     navigate(`/account/${id}/info`)
   }
-  const popover = (
+
+  useEffect(() => {
+    accountApi.getNoti(id).then((res) => {
+      console.log(res)
+      setNotification(res.data)
+    })
+  }, [])
+
+  const popover = notification.length && ( 
     <Popover id="popover-basic" className='rounded-0' style={{ width: "500px" }}>
-      <Popover.Body>
-        notification here
+      <Popover.Body className='max-h-40 overflow-y-scroll' style={{ scrollbarWidth: "thin" }}>
+        {notification.slice().reverse().map(item => (
+          <div className='w-100 hover:bg-gray-200 mb-2 rounded-1 p-1'>{item.message}</div>
+        ))}
       </Popover.Body>
     </Popover>
   );
-
+  console.log(popover)
   // console.log(user)
   return (
     <div className="d-flex justify-content-center"
