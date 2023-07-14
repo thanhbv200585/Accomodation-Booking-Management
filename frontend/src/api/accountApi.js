@@ -20,6 +20,10 @@ const accountApi = {
     changePassword: (id, idHotel, payload) =>{
         const url = `${PREFIX}/${id}/${idHotel}/changePassword`
         return axiosClient.post(url, payload)
+    },
+    getNoti: (id) => {
+        const url = `${PREFIX}/${id}/noti`
+        return axiosClient.get(url)
     }
 };  
 
