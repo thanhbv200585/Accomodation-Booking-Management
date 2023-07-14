@@ -1,8 +1,8 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { Button, OverlayTrigger, Popover, Tooltip } from 'react-bootstrap';
-import { FaBell, FaQuestionCircle } from 'react-icons/fa';
+import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import { FaBell } from 'react-icons/fa';
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
@@ -23,11 +23,11 @@ const Navbar = () => {
     setShowNotification(!shownotification)
 
   };
-  const hoverHelp = (props) => (
-    <Tooltip id="button-tooltip" className='mt-3' {...props}>
-      Customer service
-    </Tooltip>
-  );
+  // const hoverHelp = (props) => (
+  //   <Tooltip id="button-tooltip" className='mt-3' {...props}>
+  //     Customer service
+  //   </Tooltip>
+  // );
   const showDetail = () => {
     navigate(`/account/${id}/info`)
   }
@@ -39,22 +39,18 @@ const Navbar = () => {
     </Popover>
   );
 
-
-
   // console.log(user)
   return (
     <div className="d-flex justify-content-center"
-    style={{ height: "6vh", background: "#0066FF" }}>
-      <div className="d-flex align-items-center justify-content-between text-white" style={{ maxWidth: "1024px", width: "100%" }}>
+    style={{ height: "6vh", background: "#0066FF"}}>
+      <div className="d-flex align-items-center justify-content-between text-white p-2" style={{ maxWidth: "1024px", width: "100%" }}>
         <div onClick={() => { navigate(-1) }} style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}>
-          <span className="fw-bold">l am a booking</span>
+          <span className="fw-bold text-xl">vietbooking</span>
         </div>
 
           {user? (
             <>
               <div>
-               
-
                 <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
                   <Button className={`
           ${isBellActive ? 'active' : 'bg-transparent'}

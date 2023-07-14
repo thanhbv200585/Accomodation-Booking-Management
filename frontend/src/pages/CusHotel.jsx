@@ -24,13 +24,17 @@ const CusHotel = () => {
   const url = "http://localhost:8082/api/guest/hotels"
 
   useEffect(() => {
-    axios.get(url).then(response => setData(response.data))
+    console.log(destination)
+    axios.get(url, 
+      {
+        params: {"location": destination}
+      }).then(response => {setData(response.data) 
+        console.log(response)})
       .catch((err) => console.error(err))
   }, [])
-  
-  console.log(dates === "")
 
   const handleClick = async () => {
+    console.log(dates)
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } })
     await axios.get(url).then((response) => {
         setData(response.data)
@@ -39,6 +43,7 @@ const CusHotel = () => {
       })
   };
   console.log(user)
+
   return (
     <div>
       <Navbar/>
@@ -60,10 +65,13 @@ const CusHotel = () => {
               {openDate && (
                 <DateRange
                   onChange={(item) => {
+                    console.log(item.selection)
                     setDates([item.selection])
                     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } })
                   }}
                   minDate={new Date()}
+                  moveRangeOnFirstSelection={false}
+                  editableDateInputs={true}
                   ranges={dates}
                 />
               )}

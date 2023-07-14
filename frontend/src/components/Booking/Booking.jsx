@@ -12,6 +12,7 @@ const Booking = () => {
   let startDate;
   let endDate;
   const { dates } = useContext(SearchContext);
+  console.log(useLocation().state)
   const { booking, price} = useLocation().state
 
   const { id } = useLocation().state

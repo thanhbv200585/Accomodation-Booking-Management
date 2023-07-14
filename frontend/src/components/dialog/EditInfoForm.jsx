@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Form } from 'react-bootstrap'
-import ownerApi from '../../api/ownerApi';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import accountApi from '../../api/accountApi';
@@ -40,9 +39,8 @@ const EditInfoForm = ({ visible, onHide }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         try {
-            const response = await accountApi.update(id, formData)
+            await accountApi.update(id, formData)
             localStorage.setItem("username",formData.name)
             window.location.reload()
         } catch (error) {

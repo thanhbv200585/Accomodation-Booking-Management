@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom";
 import "./searchItem.css";
-import { SearchContext } from "../../context/SearchContext";
-import { useContext } from "react";
-
 
 const SearchItem = ({ item }) => { 
-  
-  const { dates } = useContext(SearchContext)
-
-  // console.log(dates)
   console.log(item)
   const assessment = (score) => {
     if (score < 2) return "Poor";
@@ -23,12 +16,12 @@ const SearchItem = ({ item }) => {
     <div className="searchItem">
       <img src={item.avatarHotel} alt="" className="siImg" />
       <div className="siDesc">
-        <h1 className="siTitle">
-          <Link to={`/hotels/${item.id}`} state={{item: item}} style={{textDecoration:"none"}}>
+        <h1 className="font-bold text-[#0071c2] hover:text-[#000]">
+          <Link to={`/hotels/${item.id}`} style={{textDecoration:"none"}}>
             {item.nameHotel}
           </Link>
         </h1>
-        <span className="siDistance">{item.location}</span>
+        <span className="font-sm">{item.location}</span>
         <span className="siTaxiOp">Free airport taxi</span>
         <span className="siFeatures">{item.shortDescription}</span>
         <span className="siCancelOp">Free cancellation </span>

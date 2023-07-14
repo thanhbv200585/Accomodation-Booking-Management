@@ -20,7 +20,11 @@ const customerApi = {
     viewAllBooking: (id) =>{
         const url = `${PREFIX}/${id}/booking/all`
         return axiosClient.get(url)
-    }
+    },
+    cancelBookingByCustomer: (accountId, bookingId, reason) => {
+        const url = `${PREFIX}/${accountId}/${bookingId}/cancelBooking?reason=${reason}`;
+        return axiosClient.delete(url)
+    }  
 };
 
 export default customerApi;

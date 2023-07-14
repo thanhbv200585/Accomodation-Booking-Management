@@ -1,53 +1,49 @@
-import useFetch from "../../hooks/useFetch";
 import "./featured.css";
 
 const Featured = () => {
-  const { data, loading, error } = useFetch(
-    // "/hotels/countByCity?cities=berlin,madrid,london"
-  );
+  const handleClick = (city) => {
+    console.log(city)
+  }
 
   return (
     <div className="featured">
-      {loading ? (
-        "Loading please wait"
-      ) : (
+      {
         <>
           <div className="featuredItem">
             <img
-              src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o="
+              src="https://cdn-bmalj.nitrocdn.com/uirOOtSrYrqqUksKHkiSCjZGZlPeXsmk/assets/images/optimized/rev-c3635d7/images/Things-to-do-in-Hanoi-Vietnam-Hoan-Kim-Lake.jpg"
               alt=""
-              className="featuredImg"
+              className="featuredImg hover:cursor-pointer"
+              onClick={() => handleClick("Hanoi")}
             />
             <div className="featuredTitles">
-              <h1>Berlin</h1>
-              <h2>{data[0]} properties</h2>
-            </div>
-          </div>
-
-          <div className="featuredItem">
-            <img
-              src="https://cf.bstatic.com/xdata/images/city/max500/690334.webp?k=b99df435f06a15a1568ddd5f55d239507c0156985577681ab91274f917af6dbb&o="
-              alt=""
-              className="featuredImg"
-            />
-            <div className="featuredTitles">
-              <h1>Madrid</h1>
-              <h2>{data[1]} properties</h2>
+              <h1 className="font-bold text-xl">Hanoi</h1>
             </div>
           </div>
           <div className="featuredItem">
             <img
-              src="https://cf.bstatic.com/xdata/images/city/max500/689422.webp?k=2595c93e7e067b9ba95f90713f80ba6e5fa88a66e6e55600bd27a5128808fdf2&o="
+              src="https://theplanetd.com/images/things-to-do-in-ho-chi-minh-city-reunification-palace.jpg"
               alt=""
-              className="featuredImg"
+              className="featuredImg hover:cursor-pointer"
+              onClick={() => handleClick("Ho Chi Minh City")}
             />
             <div className="featuredTitles">
-              <h1>London</h1>
-              <h2>{data[2]} properties</h2>
+              <h1 className="font-bold text-xl">Ho Chi Minh City</h1>
+            </div>
+          </div>
+          <div className="featuredItem">
+            <img
+              src="https://res.klook.com/image/upload/fl_lossy.progressive,w_800,c_fill,q_85/destination/ur2mrg23d91mex03l4mw.jpg"
+              alt=""
+              className="featuredImg hover:cursor-pointer"
+              onClick={() => handleClick("Danang")}
+            />
+            <div className="featuredTitles">
+              <h1 className="font-bold text-xl">Da Nang</h1>
             </div>
           </div>
         </>
-      )}
+      }
     </div>
   );
 };
